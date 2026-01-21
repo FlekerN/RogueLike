@@ -624,6 +624,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BoardManager
   FoodPrefab: {fileID: 6752701474794202228, guid: 6586caa07bf7a7b4283c54dad2133d1b, type: 3}
+  WallPrefab: {fileID: 5624569522581877423, guid: a2aab15fbc1fa1c41a71d294a762a774, type: 3}
+  EnemyObjectControllerPrefab: {fileID: 4875501756443951686, guid: 5e597054d0d9f7141b7c0eda57b6c931, type: 3}
+  ExitCellPrefab: {fileID: 5243252512797103839, guid: 6ee22034213976343bf42374c53ad197, type: 3}
   Width: 8
   Height: 8
   GroundTiles:
@@ -650,6 +653,7 @@ GameObject:
   - component: {fileID: 1643351443}
   - component: {fileID: 1643351442}
   - component: {fileID: 1643351444}
+  - component: {fileID: 1643351445}
   m_Layer: 0
   m_Name: PlayerCharacter
   m_TagString: Untagged
@@ -742,6 +746,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cc050174966ff246ace27e496fcb215, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
+--- !u!95 &1643351445
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1643351441}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 2f851a30d05ae70488f27aa8a2e76af8, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1869486524
 GameObject:
   m_ObjectHideFlags: 0
