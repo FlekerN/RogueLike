@@ -18,6 +18,9 @@ public class BoardManager : MonoBehaviour
     private Grid m_Grid;
     public int Width;
     public int Height;
+    public float wallDensity = 0.2f;
+    public float foodDensity = 0.1f;
+    private int area;
     public Tile[] GroundTiles;
     public Tile[] WallTiles;
     public List<Vector2Int> m_EmptyCellsList;
@@ -25,6 +28,7 @@ public class BoardManager : MonoBehaviour
   
    public void Init()
     {
+        area = Width * Height;
         m_Tilemap = GetComponentInChildren<Tilemap>();
         m_Grid = GetComponentInChildren<Grid>();
         //Initialize the list
@@ -89,8 +93,8 @@ public class BoardManager : MonoBehaviour
     }
     void GenerateFood()
     {
-        int foodCount = 5;
-
+        int foodCount = Mathf.RoundToInt(area * foodDensity);
+        
         for (int i = 0; i < foodCount; ++i)
         {
             int randomIndex = Random.Range(0, m_EmptyCellsList.Count);
@@ -118,7 +122,7 @@ public class BoardManager : MonoBehaviour
     }
     void GenerateWall()
     {
-        int wallCount = Random.Range(6, 10);
+        int wallCount = Mathf.RoundToInt(area * wallDensity);
 
         for (int i = 0; i < wallCount; ++i)
         {
@@ -126,6 +130,7 @@ public class BoardManager : MonoBehaviour
             Vector2Int coord = m_EmptyCellsList[randomIndex];
 
             m_EmptyCellsList.RemoveAt(randomIndex);
+
             WallObject newWall = Instantiate(WallPrefab);
             AddObject(newWall, coord);
         }

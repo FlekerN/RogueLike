@@ -627,8 +627,10 @@ MonoBehaviour:
   WallPrefab: {fileID: 5624569522581877423, guid: a2aab15fbc1fa1c41a71d294a762a774, type: 3}
   EnemyObjectControllerPrefab: {fileID: 4875501756443951686, guid: 5e597054d0d9f7141b7c0eda57b6c931, type: 3}
   ExitCellPrefab: {fileID: 5243252512797103839, guid: 6ee22034213976343bf42374c53ad197, type: 3}
-  Width: 8
-  Height: 8
+  Width: 20
+  Height: 20
+  wallDensity: 0.2
+  foodDensity: 0.05
   GroundTiles:
   - {fileID: 11400000, guid: b46063eefd101fd4785e14e71f42c951, type: 2}
   - {fileID: 11400000, guid: 57bdc307a9c37084eb84acc5b5d0d5ed, type: 2}
