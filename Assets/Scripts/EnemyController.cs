@@ -4,10 +4,13 @@ public class EnemyController : CellObject
 {
    public int Health = 3;
    private BoardManager m_Board;
+   public Sprite[] enemies;
+   private SpriteRenderer spriteRenderer;
    private int m_CurrentHealth;
 
    private void Awake()
    {
+        spriteRenderer = GetComponent<SpriteRenderer>();
         GameManager.Instance.TurnManager.OnTick += TurnHappened;
    }
 
@@ -19,6 +22,12 @@ public class EnemyController : CellObject
    public override void Init(Vector2Int coord)
    {
       base.Init(coord);
+
+     if (enemies.Length > 0)
+     {
+      Sprite newSprite = enemies[Random.Range(0, enemies.Length)];
+      spriteRenderer.sprite = newSprite;
+     }
       m_CurrentHealth = Health;
    }
 

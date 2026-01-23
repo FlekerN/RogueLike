@@ -20,6 +20,7 @@ public class BoardManager : MonoBehaviour
     public int Height;
     public float wallDensity = 0.2f;
     public float foodDensity = 0.1f;
+    public float enemyDensity = 0.005f;
     private int area;
     public Tile[] GroundTiles;
     public Tile[] WallTiles;
@@ -93,7 +94,7 @@ public class BoardManager : MonoBehaviour
     }
     void GenerateFood()
     {
-        int foodCount = Mathf.RoundToInt(area * foodDensity);
+        int foodCount =  Mathf.Max(1,Mathf.RoundToInt(area * foodDensity));
         
         for (int i = 0; i < foodCount; ++i)
         {
@@ -108,8 +109,9 @@ public class BoardManager : MonoBehaviour
     }
     void GenerateEnemy()
     {
+        int enemyCount =  Mathf.Max(1,Mathf.RoundToInt(area * enemyDensity));
 
-        for (int i = 0; i < 1; ++i)
+        for (int i = 0; i < enemyCount; ++i)
         {
             int randomIndex = Random.Range(0, m_EmptyCellsList.Count);
             Vector2Int coord = m_EmptyCellsList[randomIndex];
