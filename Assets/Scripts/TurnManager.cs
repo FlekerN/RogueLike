@@ -17,6 +17,7 @@ public class TurnManager
             OnTick.Invoke();
         }
         m_TurnCount += 1;
+        GameEvents.RaisePlayerStep();
         Debug.Log("Current turn count : " + m_TurnCount);
    }
 }

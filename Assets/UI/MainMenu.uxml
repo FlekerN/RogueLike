@@ -1,0 +1,15 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/HojaPersonajeSS.uss?fileID=7433441132597879392&amp;guid=1b1ec39941366e848b38ecd79772c710&amp;type=3#HojaPersonajeSS" />
+    <ui:VisualElement class="root">
+        <ui:VisualElement class="panel menuPanel">
+            <ui:Label text="EL ROGUELIKE" class="title mainTitle" style="align-items: auto; -unity-text-align: upper-center; justify-content: flex-start; align-content: flex-start;" />
+            <ui:VisualElement class="menuButtons">
+                <ui:Button text="NEW GAME" class="btn btnMenu" />
+                <ui:Button text="LOAD GAME" class="btn btnMenu" />
+                <ui:Button text="SETTINGS" class="btn btnMenu" />
+                <ui:Button text="QUIT" class="btn btnMenu btnDanger" />
+            </ui:VisualElement>
+            <ui:Label text="© Ancient Code Studio" class="hint footer" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

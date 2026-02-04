@@ -1,0 +1,75 @@
+/* Fondo que oscurece el juego detrás */
+.overlay {
+width: 100%;
+height: 100%;
+background-color: rgba(0, 0, 0, 0.85);
+align-items: center;
+justify-content: center;
+}
+/* La ventana principal de opciones */
+.panel {
+width: 500px;
+background-color: #1a1a1a;
+border-width: 4px;
+border-color: #6e6e6e; /* Gris piedra */
+padding: 30px;
+border-radius: 0px; /* Bordes cuadrados para toque retro
+*/
+}
+/* Título Principal */
+.header-title {
+font-size: 32px;
+color: #ff3333; /* Rojo sangre o alerta */
+-unity-font-style: bold;
+align-self: center;
+margin-bottom: 10px;
+letter-spacing: 5px;
+}
+/* Títulos de sección */
+.section-title {
+font-size: 18px;
+color: #aaaaaa;
+margin-top: 10px;
+margin-bottom: 5px;
+border-bottom-width: 1px;
+border-bottom-color: #444;
+-unity-text-align: middle-left;
+}
+/* Línea separadora */
+.separator {
+height: 2px;
+background-color: #6e6e6e;
+margin-bottom: 20px;
+}
+/* Estilo general de los campos (Dropdown y Sliders) */
+.setting-field {
+margin-bottom: 15px;
+color: #ffffff;
+font-size: 16px;
+}
+/* Ajustes específicos para las etiquetas de los inputs de
+Unity */
+.setting-field > .unity-label {
+min-width: 150px;
+color: #e0e0e0;
+}
+/* Botón Retro */
+.btn-retro {
+height: 50px;
+background-color: #2b2b2b;
+border-color: #ffffff;
+border-width: 2px;
+color: #ffffff;
+font-size: 18px;
+-unity-font-style: bold;
+margin-top: 20px;
+transition: 0.1s;
+}
+.btn-retro:hover {
+background-color: #ff3333; /* Rojo al pasar el ratón */
+color: #000000;
+}
+.btn-retro:active {
+background-color: #990000;
+border-color: #ff3333;
+}

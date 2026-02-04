@@ -1,6 +1,7 @@
+using System.Collections.Generic;
+using System.Xml.Linq;
 using UnityEngine;
 using UnityEngine.Tilemaps;
-using System.Collections.Generic;
 
 public class BoardManager : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class BoardManager : MonoBehaviour
     }
     public FoodObject FoodPrefab;
     public WallObject WallPrefab;
+    public EXPObject ExpPrefab;
     public EnemyController EnemyObjectControllerPrefab;
     public ExitCellObject ExitCellPrefab;
     private CellData[,] m_BoardData;
@@ -21,6 +23,7 @@ public class BoardManager : MonoBehaviour
     public float wallDensity = 0.2f;
     public float foodDensity = 0.1f;
     public float enemyDensity = 0.005f;
+    public float expDensity = 0.02f;
     private int area;
     public Tile[] GroundTiles;
     public Tile[] WallTiles;
@@ -73,6 +76,7 @@ public class BoardManager : MonoBehaviour
         GenerateWall();
         GenerateFood();
         GenerateEnemy();
+        GenerateExp();
     }
 
     public Vector3 CellToWorld(Vector2Int cellIndex)
@@ -135,6 +139,22 @@ public class BoardManager : MonoBehaviour
 
             WallObject newWall = Instantiate(WallPrefab);
             AddObject(newWall, coord);
+        }
+
+    }
+    void GenerateExp() 
+    {
+        int expCount = Mathf.Max(1, Mathf.RoundToInt(area * expDensity));
+
+        for (int i = 0; i < expCount; ++i)
+        {
+            int randomIndex = Random.Range(0, m_EmptyCellsList.Count);
+            Vector2Int coord = m_EmptyCellsList[randomIndex];
+
+            m_EmptyCellsList.RemoveAt(randomIndex);
+            EXPObject newEXP = Instantiate(ExpPrefab);
+            AddObject(newEXP, coord);
+
         }
 
     }

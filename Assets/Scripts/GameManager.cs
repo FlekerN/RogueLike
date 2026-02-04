@@ -4,6 +4,7 @@ public class GameManager : MonoBehaviour
 {
     public UIDocument UIDoc;
     private Label m_FoodLabel;
+    private Label m_ExpLabel;
     private VisualElement m_GameOverPanel;
     private Label m_GameOverMessage;
     public static GameManager Instance { get; private set; }
@@ -11,7 +12,10 @@ public class GameManager : MonoBehaviour
     public PlayerController PlayerController;
     public TurnManager TurnManager { get; private set;}
     private int m_FoodAmount = 100;
+    private int m_EXPAmount = 0;
+    private int m_EXPToReach = 10;
     private int m_CurrentLevel = 1;
+
     private void Awake()
     {
         if (Instance != null)
@@ -29,6 +33,7 @@ void Start()
    TurnManager.OnTick += OnTurnHappen;
   
    m_FoodLabel = UIDoc.rootVisualElement.Q<Label>("FoodLabel");
+   m_ExpLabel = UIDoc.rootVisualElement.Q<Label>("EXPLabel");
   
    m_GameOverPanel = UIDoc.rootVisualElement.Q<VisualElement>("GameOverPanel");
    m_GameOverMessage = m_GameOverPanel.Q<Label>("GameOverMessage");
@@ -49,6 +54,17 @@ void Start()
             PlayerController.GameOver();
             m_GameOverPanel.style.visibility = Visibility.Visible;
             m_GameOverMessage.text = "Game Over!\n\nYou traveled through " + m_CurrentLevel + " levels";
+        }
+    }
+    public void ChangeEXP(int amount)
+    {
+        m_EXPAmount += amount;
+        m_ExpLabel.text = "Experience: " + m_EXPAmount;
+
+        if (m_EXPAmount >= m_EXPToReach)
+        {
+            //sube de nivel
+            m_EXPToReach += 5;
         }
     }
     public void NewLevel()

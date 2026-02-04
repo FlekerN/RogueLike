@@ -37,7 +37,8 @@ public class EnemyController : CellObject
 
        if (m_CurrentHealth <= 0)
        {
-          Destroy(gameObject);
+            GameEvents.RaiseEnemyKill();
+            Destroy(gameObject);
        }
 
        return false;

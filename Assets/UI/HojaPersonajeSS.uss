@@ -1,0 +1,339 @@
+/* Raíz pantalla */
+.root {
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+
+    /* Fondo oscuro tipo mazmorra */
+    background-color: rgb(18, 16, 16);
+}
+
+/* Panel principal */
+.panel {
+    width: 900px;
+    max-width: 95%;
+    height: 520px;
+    max-height: 95%;
+
+    padding: 18px;
+    background-color: rgb(36, 30, 26);
+
+    /* Borde duro pixel */
+    border-left-width: 4px;
+    border-right-width: 4px;
+    border-top-width: 4px;
+    border-bottom-width: 4px;
+
+    border-left-color: rgb(108, 86, 60);
+    border-right-color: rgb(108, 86, 60);
+    border-top-color: rgb(140, 112, 78);
+    border-bottom-color: rgb(76, 60, 42);
+
+    /* Esquinas “cuadradas” */
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
+
+/* Header */
+.header {
+    margin-bottom: 14px;
+}
+
+.title {
+    unity-font-style: bold;
+    font-size: 26px;
+    color: rgb(230, 215, 180);
+    text-align: center;
+    margin-bottom: 10px;
+
+    /* Si usas FontAsset pixel, asígnalo aquí:
+       -unity-font-definition: url("Assets/Fonts/PixelFont.asset");
+    */
+}
+
+.topRow {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nameBox, .pointsBox {
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+}
+
+.label {
+    font-size: 16px;
+    color: rgb(205, 190, 160);
+}
+
+.textField {
+    width: 280px;
+    background-color: rgb(24, 20, 18);
+    color: rgb(240, 230, 200);
+
+    border-left-width: 2px;
+    border-right-width: 2px;
+    border-top-width: 2px;
+    border-bottom-width: 2px;
+    border-left-color: rgb(90, 72, 52);
+    border-right-color: rgb(90, 72, 52);
+    border-top-color: rgb(120, 96, 68);
+    border-bottom-color: rgb(60, 48, 34);
+
+    padding-left: 8px;
+    padding-right: 8px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+}
+.statControls {
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    flex-shrink: 0;       
+    width: 130px;        
+}
+
+.pointsValue {
+    font-size: 18px;
+    unity-font-style: bold;
+    color: rgb(255, 210, 120);
+    background-color: rgb(24, 20, 18);
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+
+    border-left-width: 2px;
+    border-right-width: 2px;
+    border-top-width: 2px;
+    border-bottom-width: 2px;
+    border-left-color: rgb(90, 72, 52);
+    border-right-color: rgb(90, 72, 52);
+    border-top-color: rgb(120, 96, 68);
+    border-bottom-color: rgb(60, 48, 34);
+}
+
+/* Body columnas */
+.body {
+    flex: 1;
+    flex-direction: row;
+    gap: 16px;
+}
+
+/* Columnas */
+.col {
+    flex: 1;
+    background-color: rgb(28, 24, 22);
+    padding: 12px;
+
+    border-left-width: 3px;
+    border-right-width: 3px;
+    border-top-width: 3px;
+    border-bottom-width: 3px;
+
+    border-left-color: rgb(84, 66, 48);
+    border-right-color: rgb(84, 66, 48);
+    border-top-color: rgb(120, 96, 68);
+    border-bottom-color: rgb(50, 40, 30);
+}
+
+.sectionTitle {
+    font-size: 18px;
+    unity-font-style: bold;
+    color: rgb(230, 215, 180);
+    margin-bottom: 10px;
+}
+
+/* Filas de atributos */
+.statRow {
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    margin-bottom: 10px;
+    padding: 6px;
+    gap: 10px;
+    background-color: rgb(22, 18, 16);
+
+    border-left-width: 2px;
+    border-right-width: 2px;
+    border-top-width: 2px;
+    border-bottom-width: 2px;
+
+    border-left-color: rgb(70, 56, 40);
+    border-right-color: rgb(70, 56, 40);
+    border-top-color: rgb(95, 76, 54);
+    border-bottom-color: rgb(40, 32, 24);
+}
+
+.statName {
+    flex-grow: 1;    
+    flex-shrink: 1;   
+    min-width: 0;     
+    unity-text-align: upper-center;
+    width: auto; 
+    font-size: 16px;
+    color: rgb(205, 190, 160);
+}
+
+.statValue {
+    width: 32px;
+    unity-text-align: upper-center;
+    font-size: 16px;
+    unity-font-style: bold;
+    color: rgb(240, 230, 200);
+}
+
+/* Botones */
+.btn {
+    width: 34px;
+    height: 28px;
+
+    background-color: rgb(46, 38, 32);
+    color: rgb(240, 230, 200);
+
+    border-left-width: 2px;
+    border-right-width: 2px;
+    border-top-width: 2px;
+    border-bottom-width: 2px;
+
+    border-left-color: rgb(90, 72, 52);
+    border-right-color: rgb(90, 72, 52);
+    border-top-color: rgb(140, 112, 78);
+    border-bottom-color: rgb(60, 48, 34);
+}
+
+.btn:hover {
+    background-color: rgb(58, 48, 40);
+}
+
+.btn:active {
+    background-color: rgb(34, 28, 24);
+}
+
+.btnPrimary {
+    width: 100%;
+    height: 36px;
+    margin-top: 8px;
+    unity-font-style: bold;
+    color: rgb(255, 210, 120);
+}
+
+/* Columna derecha info */
+.infoRow {
+
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 6px;
+    margin-bottom: 8px;
+    background-color: rgb(22, 18, 16);
+
+    border-left-width: 2px;
+    border-right-width: 2px;
+    border-top-width: 2px;
+    border-bottom-width: 2px;
+
+    border-left-color: rgb(70, 56, 40);
+    border-right-color: rgb(70, 56, 40);
+    border-top-color: rgb(95, 76, 54);
+    border-bottom-color: rgb(40, 32, 24);
+}
+
+.infoName {
+    align:middle;
+    font-size: 16px;
+    color: rgb(205, 190, 160);
+}
+
+.infoValue {
+    font-size: 16px;
+    unity-font-style: bold;
+    color: rgb(240, 230, 200);
+}
+
+.divider {
+    height: 2px;
+    background-color: rgb(76, 60, 42);
+    margin-top: 12px;
+    margin-bottom: 12px;
+}
+
+.hint {
+    font-size: 12px;
+    color: rgb(170, 160, 140);
+    white-space: normal;
+}
+/* Panel menú */
+.menuPanel {
+    width: 480px;
+    height: auto;
+    padding: 24px;
+    justify-content: center;
+}
+
+/* Título principal */
+.mainTitle {
+    font-size: 32px;
+    unity-font-style: bold;
+    margin-bottom: 24px;
+    color: rgb(255, 225, 170);
+    text-align: center;
+}
+
+/* Contenedor botones */
+.menuButtons {
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* Botones del menú */
+.btnMenu {
+    width: 100%;
+    height: 44px;
+
+    font-size: 18px;
+    unity-font-style: bold;
+
+    background-color: rgb(46, 38, 32);
+    color: rgb(240, 230, 200);
+
+    border-left-width: 3px;
+    border-right-width: 3px;
+    border-top-width: 3px;
+    border-bottom-width: 3px;
+
+    border-left-color: rgb(90, 72, 52);
+    border-right-color: rgb(90, 72, 52);
+    border-top-color: rgb(140, 112, 78);
+    border-bottom-color: rgb(60, 48, 34);
+}
+
+.btnMenu:hover {
+    background-color: rgb(62, 52, 44);
+}
+
+.btnMenu:active {
+    background-color: rgb(30, 24, 20);
+}
+
+/* Botón peligro (Salir) */
+.btnDanger {
+    color: rgb(220, 120, 120);
+}
+
+.btnDanger:hover {
+    background-color: rgb(72, 40, 40);
+}
+
+/* Footer */
+.footer {
+    margin-top: 18px;
+    text-align: center;
+    font-size: 12px;
+    color: rgb(150, 140, 120);
+}

@@ -1,0 +1,17 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/SettingsSS.uss?fileID=7433441132597879392&amp;guid=67ada0badc1b2de42a03be96ed5a7c5a&amp;type=3#SettingsSS" />
+    <ui:VisualElement name="Overlay" class="overlay">
+        <ui:VisualElement name="SettingsPanel" class="panel">
+            <ui:Label text="SYSTEM CONFIG" class="header-title" />
+            <ui:VisualElement class="separator" />
+            <ui:Label text="DISPLAY" class="section-title" />
+            <ui:DropdownField label="Screen Mode" name="DropdownDisplay" index="0" choices="Fullscreen,Windowed" class="setting-field" />
+            <ui:VisualElement style="height: 20px;" />
+            <ui:Label text="AUDIO" class="section-title" />
+            <ui:SliderInt label="Music Volume" name="SliderMusic" low-value="0" high-value="100" value="50" class="setting-field" />
+            <ui:SliderInt label="SFX Volume" name="SliderSFX" low-value="0" high-value="100" value="80" class="setting-field" />
+            <ui:VisualElement style="flex-grow: 1;" />
+            <ui:Button text="CONFIRM &amp; RETURN" name="BtnClose" class="btn-retro" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
