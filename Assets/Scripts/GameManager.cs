@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UIElements;
+using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public UIDocument UIDoc;
@@ -7,7 +8,7 @@ public class GameManager : MonoBehaviour
     private Label m_ExpLabel;
     private VisualElement m_GameOverPanel;
     private Label m_GameOverMessage;
-    public static GameManager Instance { get; private set; }
+    private static GameManager _instance;
     public BoardManager BoardManager;
     public PlayerController PlayerController;
     public TurnManager TurnManager { get; private set;}
@@ -15,31 +16,66 @@ public class GameManager : MonoBehaviour
     private int m_EXPAmount = 0;
     private int m_EXPToReach = 10;
     private int m_CurrentLevel = 1;
+    public PlayerStats PlayerData { get; private set; }
+
+    public void SetPlayerData(PlayerStats data)
+    {
+        PlayerData = data?.Clone();
+        Debug.Log($"PlayerData guardado. STR={PlayerData.fuerza}, VIT={PlayerData.resistencia}");
+    }
+    public static GameManager Instance
+    {
+        get
+        {
+            // Si la instancia aún no ha sido creada, la creamos
+            if (_instance == null)
+            {
+                Debug.Log("CREANDO GameManager desde Instance() en escena: " + UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
+                // Buscamos una instancia existente en la escena
+                _instance = FindFirstObjectByType<GameManager>();
+                // Si no existe ninguna, creamos una nueva
+                if (_instance == null)
+                {
+                    GameObject singletonObject = new GameObject("GameManager");
+                    _instance = singletonObject.AddComponent<GameManager>();
+                }
+                // Aseguramos que la instancia no se destruya al cambiar de escena
+                DontDestroyOnLoad(_instance.gameObject);
+            }
+            return _instance;
+        }
+    }
+    // Método que será llamado para el manejo del puntaje, por ejemplo
+    public void LogMessage(string message)
+    {
+        Debug.Log(message);
+    }
 
     private void Awake()
     {
-        if (Instance != null)
+        // Si ya existe una instancia, destruye el objeto actual
+        if (_instance != null && _instance != this)
         {
-           Destroy(gameObject);
-           return;
+            Destroy(gameObject);
         }
-      
-       Instance = this;
-    }
-  
-void Start()
-{
-   TurnManager = new TurnManager();
-   TurnManager.OnTick += OnTurnHappen;
-  
-   m_FoodLabel = UIDoc.rootVisualElement.Q<Label>("FoodLabel");
-   m_ExpLabel = UIDoc.rootVisualElement.Q<Label>("EXPLabel");
-  
-   m_GameOverPanel = UIDoc.rootVisualElement.Q<VisualElement>("GameOverPanel");
-   m_GameOverMessage = m_GameOverPanel.Q<Label>("GameOverMessage");
 
-   StartNewGame();
-}
+        _instance = this;
+        DontDestroyOnLoad(gameObject); // Mantener el objeto a través de escenas
+        
+    }
+    void Start()
+    {
+        TurnManager = new TurnManager();
+        TurnManager.OnTick += OnTurnHappen;
+
+        m_FoodLabel = UIDoc.rootVisualElement.Q<Label>("FoodLabel");
+        m_ExpLabel = UIDoc.rootVisualElement.Q<Label>("EXPLabel");
+
+        m_GameOverPanel = UIDoc.rootVisualElement.Q<VisualElement>("GameOverPanel");
+        m_GameOverMessage = m_GameOverPanel.Q<Label>("GameOverMessage");
+        
+        StartNewGame();
+    }
     void OnTurnHappen()
     {
         ChangeFood(-1);

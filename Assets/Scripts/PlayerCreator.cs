@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UIElements;
+using UnityEngine.SceneManagement;
 
 public class PlayerCreator : MonoBehaviour
 {
@@ -49,8 +50,20 @@ public class PlayerCreator : MonoBehaviour
         root.Q<Button>("btnVitMinus").clicked += () => QuitarPunto(ATTRIBUTES.resistencia);
         root.Q<Button>("btnDexMinus").clicked += () => QuitarPunto(ATTRIBUTES.destreza);
         root.Q<Button>("btnIntMinus").clicked += () => QuitarPunto(ATTRIBUTES.inteligencia);
-    }
 
+        root.Q<Button>("btnConfirm").clicked += () =>AsignarAtributos();
+    }
+    private void AsignarAtributos()
+    {
+        // Cambiar de escena (pon aquí tu escena real)
+        SceneManager.LoadScene("Main");
+        // Guardar en el GameManager antes de cambiar de escena
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        GameManager.Instance.SetPlayerData(playerData);
+    }
     // ---------- LÓGICA ----------
     private void AsignarPunto(ATTRIBUTES atributo)
     {

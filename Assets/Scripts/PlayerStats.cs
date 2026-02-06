@@ -30,6 +30,18 @@ public class PlayerStats
         this.nombre = nombre;
         
     }
-
+    public PlayerStats Clone()
+    {
+        return new PlayerStats
+        {
+            nombre = this.nombre,
+            fuerza = this.fuerza,
+            resistencia = this.resistencia,
+            destreza = this.destreza,
+            inteligencia = this.inteligencia,
+            puntosDisponibles = this.puntosDisponibles,
+            experiencia = this.experiencia
+        };
+    }
 
 }
