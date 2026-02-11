@@ -768,8 +768,8 @@ MonoBehaviour:
   ExpPrefab: {fileID: -4094206446316558368, guid: f8517bcc137f84f4cbea40883bdf176b, type: 3}
   EnemyObjectControllerPrefab: {fileID: 4875501756443951686, guid: 5e597054d0d9f7141b7c0eda57b6c931, type: 3}
   ExitCellPrefab: {fileID: 5243252512797103839, guid: 6ee22034213976343bf42374c53ad197, type: 3}
-  Width: 20
-  Height: 20
+  Width: 12
+  Height: 12
   wallDensity: 0.2
   foodDensity: 0.05
   enemyDensity: 0.005

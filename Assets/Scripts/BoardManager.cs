@@ -58,10 +58,9 @@ public class BoardManager : MonoBehaviour
                     tile = GroundTiles[Random.Range(0, GroundTiles.Length)];
                     m_BoardData[x, y].Passable = true;
                     
-                    //this is a passable empty cell, add it to the list!
+                    //this is a passable empty cell, add it to the list
                     m_EmptyCellsList.Add(new Vector2Int(x, y));
                 }
-                
                 m_Tilemap.SetTile(new Vector3Int(x, y, 0), tile);
             }
         }
@@ -85,7 +84,7 @@ public class BoardManager : MonoBehaviour
     }
     public Tile GetCellTile(Vector2Int cellIndex)
     {
-        return m_Tilemap.GetTile<Tile>(new Vector3Int(cellIndex.x,     cellIndex.y, 0));
+        return m_Tilemap.GetTile<Tile>(new Vector3Int(cellIndex.x, cellIndex.y, 0));
     }
     public CellData GetCellData(Vector2Int cellIndex)
     {
@@ -108,7 +107,6 @@ public class BoardManager : MonoBehaviour
             m_EmptyCellsList.RemoveAt(randomIndex);
             FoodObject newFood = Instantiate(FoodPrefab);
             AddObject(newFood, coord);
-            
         }
     }
     void GenerateEnemy()
@@ -173,7 +171,6 @@ public class BoardManager : MonoBehaviour
     }
     public void Clean()
     {
-        //no board data, so exit early, nothing to clean
         if(m_BoardData == null) return;
 
         for (int y = 0; y < Height; ++y)
@@ -181,15 +178,10 @@ public class BoardManager : MonoBehaviour
             for (int x = 0; x < Width; ++x)
             {
                 var cellData = m_BoardData[x, y];
-
                 if (cellData.ContainedObject != null)
                 {
-                    //CAREFUL! Destroy the GameObject NOT just cellData.ContainedObject
-                    //Otherwise what you are destroying is the JUST CellObject COMPONENT
-                    //and not the whole gameobject with sprite
                     Destroy(cellData.ContainedObject.gameObject);
                 }
-
                 SetCellTile(new Vector2Int(x,y), null);
             }
         }

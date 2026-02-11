@@ -12,9 +12,9 @@ public class AchievementManger : MonoBehaviour
     {
         Logros = new List<Achievment>();
 
-        Achievment logro = new Achievment("KILL","Exterminador", "La sangre empapa tus ojos", 100);
+        Achievment logro = new Achievment("KILL","Exterminador", "La sangre empapa tus ojos", 10);
         Logros.Add(logro);
-        logro = new Achievment("KILL", "Genocida", "Memorias de un pintor Austriaco", 1000);
+        logro = new Achievment("KILL", "Genocida", "Memorias de un pintor Austriaco", 100);
         Logros.Add(logro);
         logro = new Achievment("FOOD", "Cementerio de Hamburguesas", "Deberios de pensar en una dieta", 1000);
         Logros.Add(logro);

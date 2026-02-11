@@ -55,15 +55,13 @@ public class PlayerCreator : MonoBehaviour
     }
     private void AsignarAtributos()
     {
+        SessionManager.Instance.SetPlayerData(playerData);
         // Cambiar de escena (pon aquí tu escena real)
         SceneManager.LoadScene("Main");
         // Guardar en el GameManager antes de cambiar de escena
-        SceneManager.sceneLoaded += OnSceneLoaded;
+
     }
-    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    {
-        GameManager.Instance.SetPlayerData(playerData);
-    }
+
     // ---------- LÓGICA ----------
     private void AsignarPunto(ATTRIBUTES atributo)
     {
