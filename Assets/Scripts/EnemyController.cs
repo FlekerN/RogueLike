@@ -33,7 +33,7 @@ public class EnemyController : CellObject
 
    public override bool PlayerWantsToEnter()
    {
-       m_CurrentHealth -= 1;
+       m_CurrentHealth -= SessionManager.Instance.PlayerData.damage;
 
        if (m_CurrentHealth <= 0)
        {

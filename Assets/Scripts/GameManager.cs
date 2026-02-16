@@ -6,14 +6,17 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
     public UIDocument UIDoc;
+
     private Label m_FoodLabel;
     private Label m_ExpLabel;
+    private Label m_PlayerLabel;
+    public string m_PlayerName;
     private VisualElement m_GameOverPanel;
     private Label m_GameOverMessage;
     public BoardManager BoardManager;
     public PlayerController PlayerController;
     public TurnManager TurnManager { get; private set;}
-    private int m_FoodAmount = 100;
+    private int m_FoodAmount;
     private int m_EXPAmount = 0;
     private int m_EXPToReach = 10;
     private int m_CurrentLevel = 1;
@@ -34,11 +37,13 @@ public class GameManager : MonoBehaviour
         TurnManager = new TurnManager();
         TurnManager.OnTick += OnTurnHappen;
 
-        m_FoodLabel = UIDoc.rootVisualElement.Q<Label>("FoodLabel");
-        m_ExpLabel = UIDoc.rootVisualElement.Q<Label>("EXPLabel");
+        m_FoodLabel = UIDoc.rootVisualElement.Q<Label>("foodLabel");
+        m_ExpLabel = UIDoc.rootVisualElement.Q<Label>("xpLabel");
+        m_PlayerLabel = UIDoc.rootVisualElement.Q<Label>("playerValueLabel");
+        m_PlayerName = SessionManager.Instance.PlayerData.nombre;
 
-        m_GameOverPanel = UIDoc.rootVisualElement.Q<VisualElement>("GameOverPanel");
-        m_GameOverMessage = m_GameOverPanel.Q<Label>("GameOverMessage");
+       // m_GameOverPanel = UIDoc.rootVisualElement.Q<VisualElement>("GameOverPanel");
+       // m_GameOverMessage = m_GameOverPanel.Q<Label>("GameOverMessage");
         
         StartNewGame();
     }
@@ -49,19 +54,19 @@ public class GameManager : MonoBehaviour
     public void ChangeFood(int amount)
     {
         m_FoodAmount += amount;
-        m_FoodLabel.text = "Food : " + m_FoodAmount;
+        m_FoodLabel.text = m_FoodAmount.ToString();
 
         if (m_FoodAmount <= 0)
         {
             PlayerController.GameOver();
-            m_GameOverPanel.style.visibility = Visibility.Visible;
-            m_GameOverMessage.text = "Game Over!\n\nYou traveled through " + m_CurrentLevel + " levels";
+           // m_GameOverPanel.style.visibility = Visibility.Visible;
+           // m_GameOverMessage.text = "Game Over!\n\nYou traveled through " + m_CurrentLevel + " levels";
         }
     }
     public void ChangeEXP(int amount)
     {
         m_EXPAmount += amount;
-        m_ExpLabel.text = "Experience: " + m_EXPAmount;
+        m_ExpLabel.text = m_EXPAmount.ToString();
 
         if (m_EXPAmount >= m_EXPToReach)
         {
@@ -83,12 +88,14 @@ public class GameManager : MonoBehaviour
     }
     public void StartNewGame()
     {
-        m_GameOverPanel.style.visibility = Visibility.Hidden;
+       // m_GameOverPanel.style.visibility = Visibility.Hidden;
         
         m_CurrentLevel = 1;
-        m_FoodAmount = 20;
-        m_FoodLabel.text = "Food : " + m_FoodAmount;
-        
+        m_FoodAmount = SessionManager.Instance.PlayerData.vidaMaxima;
+        m_FoodLabel.text = m_FoodAmount.ToString();
+        m_ExpLabel.text = m_EXPAmount.ToString();
+        m_PlayerLabel.text = m_PlayerName;
+
         BoardManager.Clean();
         BoardManager.Init();
 

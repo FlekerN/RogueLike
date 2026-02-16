@@ -1,7 +1,19 @@
-<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
-    <ui:Label text="Label" name="FoodLabel" style="-unity-font-definition: url(&quot;project://database/Assets/Roguelike2D/TutorialAssets/Fonts/PressStart2P-Regular.ttf?fileID=12800000&amp;guid=b284a6525342f44599e9ce79e37c2d61&amp;type=3#PressStart2P-Regular&quot;); font-size: 10px; -unity-text-align: upper-center; position: absolute; bottom: 0; left: 0; right: 0; -unity-background-image-tint-color: rgb(255, 255, 255); color: rgb(255, 255, 255);" />
-    <ui:VisualElement name="GameOverPanel" style="flex-grow: 1; position: absolute; bottom: 0; right: 0; top: 0; left: 0; align-items: center; justify-content: space-around;">
-        <ui:Label text="Game Over" name="GameOverMessage" style="align-items: auto; justify-content: flex-start; -unity-font-definition: url(&quot;project://database/Assets/Roguelike2D/TutorialAssets/Fonts/PressStart2P-Regular.ttf?fileID=12800000&amp;guid=b284a6525342f44599e9ce79e37c2d61&amp;type=3#PressStart2P-Regular&quot;); color: rgb(188, 19, 19); font-size: 16px;" />
+<ui:UXML xmlns:ui="UnityEngine.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/HojaPersonajeSS.uss?fileID=7433441132597879392&amp;guid=1b1ec39941366e848b38ecd79772c710&amp;type=3#HojaPersonajeSS" />
+    <ui:VisualElement class="hud-root">
+        <ui:VisualElement class="hud-panel">
+            <ui:VisualElement class="hud-row">
+                <ui:Label name="playerNameLabel" text="Jugador" class="hud-name" />
+                <ui:Label name="playerValueLabel" text="--" class="hud-value" />
+            </ui:VisualElement>
+            <ui:VisualElement class="hud-row">
+                <ui:Label text="Comida" class="hud-name" />
+                <ui:Label name="foodLabel" text="0" class="hud-value" />
+            </ui:VisualElement>
+            <ui:VisualElement class="hud-row">
+                <ui:Label text="Experiencia" class="hud-name" />
+                <ui:Label name="xpLabel" text="0" class="hud-value" />
+            </ui:VisualElement>
+        </ui:VisualElement>
     </ui:VisualElement>
-    <ui:Label text="Label" name="EXPLabel" style="-unity-font-definition: url(&quot;project://database/Assets/Roguelike2D/TutorialAssets/Fonts/PressStart2P-Regular.ttf?fileID=12800000&amp;guid=b284a6525342f44599e9ce79e37c2d61&amp;type=3#PressStart2P-Regular&quot;); font-size: 10px; -unity-text-align: upper-left; position: absolute; bottom: 0; left: 0; right: 0; -unity-background-image-tint-color: rgb(255, 255, 255); color: rgb(255, 255, 255); align-self: auto;" />
 </ui:UXML>

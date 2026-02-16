@@ -1,7 +1,7 @@
-<ui:UXML xmlns:ui="UnityEngine.UIElements" editor-extension-mode="False">
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
     <Style src="project://database/Assets/UI/HojaPersonajeSS.uss?fileID=7433441132597879392&amp;guid=1b1ec39941366e848b38ecd79772c710&amp;type=3#HojaPersonajeSS" />
     <ui:VisualElement name="root" class="root">
-        <ui:VisualElement class="panel" style="height: 601px; width: 553px;">
+        <ui:VisualElement class="panel" style="width: 672px;">
             <ui:VisualElement class="header">
                 <ui:Label text="CREACIÓN DE PERSONAJE" class="title" />
                 <ui:VisualElement class="topRow">
@@ -18,6 +18,14 @@
             <ui:VisualElement class="body">
                 <ui:VisualElement class="col attributes" style="margin-right: 0;">
                     <ui:Label text="ATRIBUTOS" class="sectionTitle" />
+                    <ui:VisualElement class="statRow">
+                        <ui:Label text="Resistencia" class="statName" />
+                        <ui:VisualElement class="statControls">
+                            <ui:Button name="btnVitMinus" text="-" class="btn btnMinus" />
+                            <ui:Label name="lblVit" text="1" class="statValue" style="-unity-text-align: upper-center;" />
+                            <ui:Button name="btnVitPlus" text="+" class="btn btnPlus" />
+                        </ui:VisualElement>
+                    </ui:VisualElement>
                     <ui:VisualElement name="VisualElement" class="statRow">
                         <ui:Label text="Fuerza" class="statName" />
                         <ui:VisualElement class="statControls">
@@ -27,15 +35,7 @@
                         </ui:VisualElement>
                     </ui:VisualElement>
                     <ui:VisualElement class="statRow">
-                        <ui:Label text="Resistencia" class="statName" />
-                        <ui:VisualElement class="statControls">
-                            <ui:Button name="btnVitMinus" text="-" class="btn btnMinus" />
-                            <ui:Label name="lblVit" text="1" class="statValue" style="-unity-text-align: upper-center;" />
-                            <ui:Button name="btnVitPlus" text="+" class="btn btnPlus" />
-                        </ui:VisualElement>
-                    </ui:VisualElement>
-                    <ui:VisualElement class="statRow">
-                        <ui:Label text="Destreza" class="statName" />
+                        <ui:Label text="Supervivencia" class="statName" />
                         <ui:VisualElement class="statControls">
                             <ui:Button name="btnDexMinus" text="-" class="btn btnMinus" />
                             <ui:Label name="lblDex" text="1" class="statValue" style="-unity-text-align: upper-center;" />
@@ -51,32 +51,28 @@
                         </ui:VisualElement>
                     </ui:VisualElement>
                     <ui:VisualElement class="divider" />
-                    <ui:Button name="btnConfirm" text="CONFIRMAR" class="btn btnPrimary" />
+                    <ui:Button name="btnBack" text="VOLVER" class="btn btnPrimary" />
                 </ui:VisualElement>
-                <ui:VisualElement class="col derived" style="margin-left: 0;">
+                <ui:VisualElement name="VisualElement" class="col derived" style="margin-left: 0;">
                     <ui:Label text="ESTADÍSTICAS" class="sectionTitle" />
                     <ui:VisualElement class="infoRow">
                         <ui:Label text="Vida" class="infoName" style="justify-content: flex-start; align-content: auto; -unity-text-align: middle-left; margin-bottom: 4px;" />
-                        <ui:Label name="lblHP" text="100" class="infoValue" style="-unity-text-align: middle-left; margin-bottom: 4px;" />
+                        <ui:Label name="lblHP" text="20" class="infoValue" style="-unity-text-align: middle-left; margin-bottom: 4px;" />
                     </ui:VisualElement>
                     <ui:VisualElement class="infoRow">
                         <ui:Label text="Daño" class="infoName" style="margin-bottom: 4px; -unity-text-align: middle-left;" />
                         <ui:Label name="lblDMG" text="10" class="infoValue" style="margin-bottom: 4px; -unity-text-align: middle-left;" />
                     </ui:VisualElement>
                     <ui:VisualElement class="infoRow">
-                        <ui:Label text="Defensa" class="infoName" style="margin-bottom: 4px; -unity-text-align: middle-left;" />
+                        <ui:Label text="Recoleccion&#10;" class="infoName" style="margin-bottom: 4px; -unity-text-align: middle-left;" />
                         <ui:Label name="lblDEF" text="5" class="infoValue" style="margin-bottom: 4px; -unity-text-align: middle-left;" />
                     </ui:VisualElement>
                     <ui:VisualElement class="infoRow">
                         <ui:Label text="Crítico" class="infoName" style="margin-bottom: 4px; -unity-text-align: middle-left;" />
                         <ui:Label name="lblCRIT" text="2%" class="infoValue" style="margin-bottom: 4px; -unity-text-align: middle-left;" />
                     </ui:VisualElement>
-                    <ui:VisualElement class="infoRow">
-                        <ui:Label text="Vel. Ataque" class="infoName" style="margin-bottom: 4px; -unity-text-align: middle-left;" />
-                        <ui:Label name="lblAS" text="1.00" class="infoValue" style="margin-bottom: 4px; -unity-text-align: middle-left;" />
-                    </ui:VisualElement>
                     <ui:VisualElement class="divider" />
-                    <ui:Label text="Tip: El estilo pixel se logra con fuentes pixel + bordes duros + colores oscuros." class="hint" />
+                    <ui:Button name="btnConfirm" text="CONFIRMAR" class="btn btnPrimary" />
                 </ui:VisualElement>
             </ui:VisualElement>
         </ui:VisualElement>

@@ -11,9 +11,9 @@
 
 /* Panel principal */
 .panel {
-    width: 900px;
+    width: auto;
     max-width: 95%;
-    height: 520px;
+    height: auto;
     max-height: 95%;
 
     padding: 18px;
@@ -58,12 +58,19 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+
+    flex-wrap: wrap;
+    row-gap: 8px;
+    column-gap: 12px;
 }
 
 .nameBox, .pointsBox {
     flex-direction: row;
     align-items: center;
     gap: 10px;
+
+    flex-grow: 1;
+    min-width: 240px; /* si no cabe, se irá a la siguiente línea */
 }
 
 .label {
@@ -72,7 +79,9 @@
 }
 
 .textField {
-    width: 280px;
+    flex-grow: 1;
+    min-width: 140px;
+    width: auto; /* quita el fijo de 280 */
     background-color: rgb(24, 20, 18);
     color: rgb(240, 230, 200);
 
@@ -336,4 +345,67 @@
     text-align: center;
     font-size: 12px;
     color: rgb(150, 140, 120);
+}/* HUD abajo-izquierda */
+.hud-root {
+    position: absolute;
+    left: 12px;
+    bottom: 12px;
+    align-items: flex-start;
+}
+
+/* Panel HUD (similar a tus paneles/botones) */
+.hud-panel {
+    width: 280px;
+    padding: 10px;
+
+    background-color: rgb(36, 30, 26);
+
+    border-left-width: 3px;
+    border-right-width: 3px;
+    border-top-width: 3px;
+    border-bottom-width: 3px;
+
+    border-left-color: rgb(90, 72, 52);
+    border-right-color: rgb(90, 72, 52);
+    border-top-color: rgb(140, 112, 78);
+    border-bottom-color: rgb(60, 48, 34);
+
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+
+    gap: 6px;
+}
+
+/* Cada línea estilo "infoRow" */
+.hud-row {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 6px 8px;
+    background-color: rgb(22, 18, 16);
+
+    border-left-width: 2px;
+    border-right-width: 2px;
+    border-top-width: 2px;
+    border-bottom-width: 2px;
+
+    border-left-color: rgb(70, 56, 40);
+    border-right-color: rgb(70, 56, 40);
+    border-top-color: rgb(95, 76, 54);
+    border-bottom-color: rgb(40, 32, 24);
+}
+
+/* Texto */
+.hud-name {
+    font-size: 16px;
+    color: rgb(205, 190, 160);
+}
+
+.hud-value {
+    font-size: 16px;
+    unity-font-style: bold;
+    color: rgb(240, 230, 200);
 }

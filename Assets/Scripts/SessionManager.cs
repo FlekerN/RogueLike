@@ -9,7 +9,7 @@ public class SessionManager : MonoBehaviour
     public void SetPlayerData(PlayerStats data)
     {
         PlayerData = data?.Clone();
-        Debug.Log($"PlayerData guardado. STR={PlayerData.fuerza}, VIT={PlayerData.resistencia}");
+        Debug.Log($"PlayerData guardado. STR={PlayerData.fuerza}/{PlayerData.damage}, VIT={PlayerData.resistencia}/{PlayerData.vidaMaxima}");
     }
 
     // Propiedad pública para acceder a la instancia

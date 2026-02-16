@@ -11,11 +11,13 @@ public class PlayerCreator : MonoBehaviour
 
     private PlayerStats playerData;
 
+    private TextField tfName;
+
     public enum ATTRIBUTES
     {
         fuerza,
         resistencia,
-        destreza,
+        supervivencia,
         inteligencia
     }
 
@@ -34,32 +36,73 @@ public class PlayerCreator : MonoBehaviour
 
         PlayerStats nuevo = new PlayerStats();
         nuevo.puntosDisponibles = 10;
+
+        nuevo.nombre = "SinNombre";
         return nuevo;
     }
 
     private void BindUI()
     {
+        tfName = root.Q<TextField>("tfName");
+        if (tfName != null)
+        {
+            // Si ya había nombre (por defecto o cargado), lo reflejamos en UI
+            tfName.value = playerData.nombre ?? "";
+
+            // Cada vez que cambie el texto, lo guardamos en playerData
+            tfName.RegisterValueChangedCallback(evt =>
+            {
+                playerData.nombre = SanitizarNombre(evt.newValue);
+            });
+        }
         // Botones +
         root.Q<Button>("btnStrPlus").clicked += () => AsignarPunto(ATTRIBUTES.fuerza);
         root.Q<Button>("btnVitPlus").clicked += () => AsignarPunto(ATTRIBUTES.resistencia);
-        root.Q<Button>("btnDexPlus").clicked += () => AsignarPunto(ATTRIBUTES.destreza);
+        root.Q<Button>("btnDexPlus").clicked += () => AsignarPunto(ATTRIBUTES.supervivencia);
         root.Q<Button>("btnIntPlus").clicked += () => AsignarPunto(ATTRIBUTES.inteligencia);
 
         // Botones -
         root.Q<Button>("btnStrMinus").clicked += () => QuitarPunto(ATTRIBUTES.fuerza);
         root.Q<Button>("btnVitMinus").clicked += () => QuitarPunto(ATTRIBUTES.resistencia);
-        root.Q<Button>("btnDexMinus").clicked += () => QuitarPunto(ATTRIBUTES.destreza);
+        root.Q<Button>("btnDexMinus").clicked += () => QuitarPunto(ATTRIBUTES.supervivencia);
         root.Q<Button>("btnIntMinus").clicked += () => QuitarPunto(ATTRIBUTES.inteligencia);
 
         root.Q<Button>("btnConfirm").clicked += () =>AsignarAtributos();
     }
     private void AsignarAtributos()
     {
-        SessionManager.Instance.SetPlayerData(playerData);
-        // Cambiar de escena (pon aquí tu escena real)
-        SceneManager.LoadScene("Main");
-        // Guardar en el GameManager antes de cambiar de escena
+        //asegura que el último texto del campo se guarde (por si no disparó callback)
+        if (tfName != null)
+            playerData.nombre = SanitizarNombre(tfName.value);
 
+        //evitar nombres vacíos
+        if (string.IsNullOrWhiteSpace(playerData.nombre))
+        {
+            playerData.nombre = "SinNombre";
+            if (tfName != null) tfName.value = playerData.nombre;
+        }
+        
+        playerData.RecalcularStats();
+        
+        SessionManager.Instance.SetPlayerData(playerData);
+        SceneManager.LoadScene("Main");
+
+    }
+    private static string SanitizarNombre(string input)
+    {
+        if (input == null) return "";
+
+        // Recorta y colapsa espacios múltiples
+        var trimmed = input.Trim();
+        while (trimmed.Contains("  "))
+            trimmed = trimmed.Replace("  ", " ");
+
+        // Opcional: limitar longitud
+        const int maxLen = 16;
+        if (trimmed.Length > maxLen)
+            trimmed = trimmed.Substring(0, maxLen);
+
+        return trimmed;
     }
 
     // ---------- LÓGICA ----------
@@ -78,8 +121,8 @@ public class PlayerCreator : MonoBehaviour
             case ATTRIBUTES.resistencia:
                 playerData.resistencia++;
                 break;
-            case ATTRIBUTES.destreza:
-                playerData.destreza++;
+            case ATTRIBUTES.supervivencia:
+                playerData.supervivencia++;
                 break;
             case ATTRIBUTES.inteligencia:
                 playerData.inteligencia++;
@@ -104,8 +147,8 @@ public class PlayerCreator : MonoBehaviour
             case ATTRIBUTES.resistencia:
                 playerData.resistencia--;
                 break;
-            case ATTRIBUTES.destreza:
-                playerData.destreza--;
+            case ATTRIBUTES.supervivencia:
+                playerData.supervivencia--;
                 break;
             case ATTRIBUTES.inteligencia:
                 playerData.inteligencia--;
@@ -121,7 +164,7 @@ public class PlayerCreator : MonoBehaviour
         {
             ATTRIBUTES.fuerza => playerData.fuerza,
             ATTRIBUTES.resistencia => playerData.resistencia,
-            ATTRIBUTES.destreza => playerData.destreza,
+            ATTRIBUTES.supervivencia => playerData.supervivencia,
             ATTRIBUTES.inteligencia => playerData.inteligencia,
             _ => 0
         };
@@ -130,17 +173,18 @@ public class PlayerCreator : MonoBehaviour
 
     private void ActualizarUI()
     {
+        playerData.RecalcularStats();
+
         root.Q<Label>("lblStr").text = playerData.fuerza.ToString();
         root.Q<Label>("lblVit").text = playerData.resistencia.ToString();
-        root.Q<Label>("lblDex").text = playerData.destreza.ToString();
+        root.Q<Label>("lblDex").text = playerData.supervivencia.ToString();
         root.Q<Label>("lblInt").text = playerData.inteligencia.ToString();
 
         root.Q<Label>("lblPoints").text = playerData.puntosDisponibles.ToString();
 
-        root.Q<Label>("lblHP").text = (80 + playerData.resistencia * 20).ToString();
-        root.Q<Label>("lblDMG").text = (5 + playerData.fuerza * 3).ToString();
-        root.Q<Label>("lblDEF").text = (playerData.resistencia * 2 + playerData.destreza).ToString();
-        root.Q<Label>("lblCRIT").text = $"{1 + playerData.destreza * 0.5f:0.#}%";
-        root.Q<Label>("lblAS").text = $"{1f + playerData.destreza * 0.02f:0.00}";
+        root.Q<Label>("lblHP").text = playerData.vidaMaxima.ToString();
+        root.Q<Label>("lblDMG").text = (9 + playerData.fuerza).ToString();
+        root.Q<Label>("lblDEF").text = playerData.recoleccion.ToString();
+        root.Q<Label>("lblCRIT").text = $"{1 + playerData.supervivencia * 0.5f:0.#}%";
     }
 }
