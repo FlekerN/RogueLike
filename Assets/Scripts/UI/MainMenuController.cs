@@ -97,7 +97,7 @@ public class MainMenuController : MonoBehaviour
         if (!string.IsNullOrEmpty(newGameScene))
             SceneManager.LoadScene(newGameScene);
         else
-            StartNewGame(); // aquí tu lógica
+            StartNewGame(); 
     }
 
     private void OnLoadGameClicked()
@@ -106,7 +106,7 @@ public class MainMenuController : MonoBehaviour
         if (!string.IsNullOrEmpty(loadGameScene))
             SceneManager.LoadScene(loadGameScene);
         else
-            OpenLoadGame(); // aquí tu lógica
+            OpenLoadGame(); 
     }
 
     private void OnSettingsClicked()
@@ -115,7 +115,7 @@ public class MainMenuController : MonoBehaviour
         if (!string.IsNullOrEmpty(settingsScene))
             SceneManager.LoadScene(settingsScene);
         else
-            OpenSettings(); // aquí tu lógica
+            OpenSettings(); 
     }
 
     private void OnQuitClicked()
@@ -127,12 +127,12 @@ public class MainMenuController : MonoBehaviour
     // --- Acciones (personaliza aquí) ---
     private void StartNewGame()
     {
-        newGame.SetActive(true);
+        SceneManager.LoadScene("CharacterCreator");
     }
 
     private void OpenLoadGame()
     {
-        // Ejemplo: abrir panel dentro de la misma UI
+        //abrir panel dentro de la misma UI
     }
 
     private void OpenSettings()

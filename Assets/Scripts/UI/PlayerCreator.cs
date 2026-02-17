@@ -67,6 +67,7 @@ public class PlayerCreator : MonoBehaviour
         root.Q<Button>("btnDexMinus").clicked += () => QuitarPunto(ATTRIBUTES.supervivencia);
         root.Q<Button>("btnIntMinus").clicked += () => QuitarPunto(ATTRIBUTES.inteligencia);
 
+        root.Q<Button>("btnBack").clicked += () =>VolverMenuPrincipal();
         root.Q<Button>("btnConfirm").clicked += () =>AsignarAtributos();
     }
     private void AsignarAtributos()
@@ -87,6 +88,10 @@ public class PlayerCreator : MonoBehaviour
         SessionManager.Instance.SetPlayerData(playerData);
         SceneManager.LoadScene("Main");
 
+    }
+    private void VolverMenuPrincipal()
+    {
+        SceneManager.LoadScene("MainMenu");
     }
     private static string SanitizarNombre(string input)
     {

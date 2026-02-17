@@ -1,4 +1,4 @@
-/* Raíz pantalla */
+/* Raï¿½z pantalla */
 .root {
     width: 100%;
     height: 100%;
@@ -30,7 +30,7 @@
     border-top-color: rgb(140, 112, 78);
     border-bottom-color: rgb(76, 60, 42);
 
-    /* Esquinas “cuadradas” */
+    /* Esquinas ï¿½cuadradasï¿½ */
     border-top-left-radius: 0px;
     border-top-right-radius: 0px;
     border-bottom-left-radius: 0px;
@@ -49,7 +49,7 @@
     text-align: center;
     margin-bottom: 10px;
 
-    /* Si usas FontAsset pixel, asígnalo aquí:
+    /* Si usas FontAsset pixel, asï¿½gnalo aquï¿½:
        -unity-font-definition: url("Assets/Fonts/PixelFont.asset");
     */
 }
@@ -70,7 +70,7 @@
     gap: 10px;
 
     flex-grow: 1;
-    min-width: 240px; /* si no cabe, se irá a la siguiente línea */
+    min-width: 240px; /* si no cabe, se irï¿½ a la siguiente lï¿½nea */
 }
 
 .label {
@@ -277,7 +277,7 @@
     color: rgb(170, 160, 140);
     white-space: normal;
 }
-/* Panel menú */
+/* Panel menï¿½ */
 .menuPanel {
     width: 480px;
     height: auto;
@@ -285,7 +285,7 @@
     justify-content: center;
 }
 
-/* Título principal */
+/* Tï¿½tulo principal */
 .mainTitle {
     font-size: 32px;
     unity-font-style: bold;
@@ -300,7 +300,7 @@
     gap: 12px;
 }
 
-/* Botones del menú */
+/* Botones del menï¿½ */
 .btnMenu {
     width: 100%;
     height: 44px;
@@ -330,7 +330,7 @@
     background-color: rgb(30, 24, 20);
 }
 
-/* Botón peligro (Salir) */
+/* Botï¿½n peligro (Salir) */
 .btnDanger {
     color: rgb(220, 120, 120);
 }
@@ -378,7 +378,7 @@
     gap: 6px;
 }
 
-/* Cada línea estilo "infoRow" */
+/* Cada lï¿½nea estilo "infoRow" */
 .hud-row {
     flex-direction: row;
     justify-content: space-between;
@@ -408,4 +408,113 @@
     font-size: 16px;
     unity-font-style: bold;
     color: rgb(240, 230, 200);
+}
+/* Overlay raÃ­z */
+.go-root {
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+
+    /* oscurecer fondo */
+    background-color: rgb(18, 16, 16);
+}
+
+/* Panel principal */
+.go-panel {
+    width: 520px;
+    max-width: 92%;
+    height: auto;
+
+    padding: 18px;
+    background-color: rgb(36, 30, 26);
+
+    border-left-width: 4px;
+    border-right-width: 4px;
+    border-top-width: 4px;
+    border-bottom-width: 4px;
+
+    border-left-color: rgb(108, 86, 60);
+    border-right-color: rgb(108, 86, 60);
+    border-top-color: rgb(140, 112, 78);
+    border-bottom-color: rgb(76, 60, 42);
+
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+
+    gap: 10px;
+}
+
+/* TÃ­tulo */
+.go-title {
+    unity-font-style: bold;
+    font-size: 34px;
+    color: rgb(255, 210, 120);
+    text-align: center;
+
+    margin-bottom: 6px;
+}
+
+/* Contenedor stats */
+.go-stats {
+    gap: 8px;
+}
+
+/* Filas tipo HUD/infoRow */
+.go-row {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 8px 10px;
+    background-color: rgb(22, 18, 16);
+
+    border-left-width: 2px;
+    border-right-width: 2px;
+    border-top-width: 2px;
+    border-bottom-width: 2px;
+
+    border-left-color: rgb(70, 56, 40);
+    border-right-color: rgb(70, 56, 40);
+    border-top-color: rgb(95, 76, 54);
+    border-bottom-color: rgb(40, 32, 24);
+}
+
+.go-name {
+    font-size: 16px;
+    color: rgb(205, 190, 160);
+    flex-grow: 1;
+    min-width: 0;
+}
+
+.go-value {
+    font-size: 16px;
+    unity-font-style: bold;
+    color: rgb(240, 230, 200);
+    margin-left: 12px;
+}
+
+/* Separador */
+.go-divider {
+    height: 2px;
+    background-color: rgb(76, 60, 42);
+    margin-top: 6px;
+    margin-bottom: 4px;
+}
+
+.go-hint {
+    font-size: 12px;
+    color: rgb(170, 160, 140);
+    text-align: center;
+    white-space: normal;
+}
+
+/* BotÃ³n primario del panel */
+.go-btnPrimary {
+    width: 100%;
+    height: 40px;
+    unity-font-style: bold;
+    color: rgb(255, 210, 120);
 }

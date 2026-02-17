@@ -1,0 +1,25 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/HojaPersonajeSS.uss?fileID=7433441132597879392&amp;guid=1b1ec39941366e848b38ecd79772c710&amp;type=3#HojaPersonajeSS" />
+    <ui:VisualElement class="go-root">
+        <ui:VisualElement class="go-panel">
+            <ui:Label text="GAME OVER" class="go-title" />
+            <ui:VisualElement class="go-stats">
+                <ui:VisualElement class="go-row">
+                    <ui:Label text="Niveles completados" class="go-name" />
+                    <ui:Label name="LevelsValue" text="0" class="go-value" />
+                </ui:VisualElement>
+                <ui:VisualElement class="go-row">
+                    <ui:Label text="Turnos" class="go-name" />
+                    <ui:Label name="TurnsValue" text="0" class="go-value" />
+                </ui:VisualElement>
+                <ui:VisualElement class="go-row">
+                    <ui:Label text="Experiencia conseguida" class="go-name" />
+                    <ui:Label name="ExpValue" text="0" class="go-value" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:VisualElement class="go-divider" />
+            <ui:Label text="Pulsa para volver al inicio." class="go-hint" />
+            <ui:Button name="BackToMenuButton" text="VOLVER AL INICIO" class="btn go-btnPrimary" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

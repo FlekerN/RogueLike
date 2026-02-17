@@ -6,18 +6,17 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
     public UIDocument UIDoc;
-
     private Label m_FoodLabel;
     private Label m_ExpLabel;
     private Label m_PlayerLabel;
     public string m_PlayerName;
-    private VisualElement m_GameOverPanel;
-    private Label m_GameOverMessage;
     public BoardManager BoardManager;
     public PlayerController PlayerController;
     public TurnManager TurnManager { get; private set;}
+    public int CurrentLevel => m_CurrentLevel;
+    public int CurrentEXP => m_EXPAmount;
     private int m_FoodAmount;
-    private int m_EXPAmount = 0;
+    private int m_EXPAmount;
     private int m_EXPToReach = 10;
     private int m_CurrentLevel = 1;
 
@@ -41,9 +40,6 @@ public class GameManager : MonoBehaviour
         m_ExpLabel = UIDoc.rootVisualElement.Q<Label>("xpLabel");
         m_PlayerLabel = UIDoc.rootVisualElement.Q<Label>("playerValueLabel");
         m_PlayerName = SessionManager.Instance.PlayerData.nombre;
-
-       // m_GameOverPanel = UIDoc.rootVisualElement.Q<VisualElement>("GameOverPanel");
-       // m_GameOverMessage = m_GameOverPanel.Q<Label>("GameOverMessage");
         
         StartNewGame();
     }
@@ -59,8 +55,10 @@ public class GameManager : MonoBehaviour
         if (m_FoodAmount <= 0)
         {
             PlayerController.GameOver();
-           // m_GameOverPanel.style.visibility = Visibility.Visible;
-           // m_GameOverMessage.text = "Game Over!\n\nYou traveled through " + m_CurrentLevel + " levels";
+
+            SaveRunResults();
+
+            SceneManager.LoadScene("EndScreen");
         }
     }
     public void ChangeEXP(int amount)
@@ -76,19 +74,18 @@ public class GameManager : MonoBehaviour
     }
     public void NewLevel()
     {
-        if (m_CurrentLevel >=5) 
+        if (m_CurrentLevel >=5)
         {
-
+            
         }
         BoardManager.Clean();
         BoardManager.Init();
         PlayerController.Spawn(BoardManager, new Vector2Int(1,1));
-
+        
         m_CurrentLevel++;
     }
     public void StartNewGame()
     {
-       // m_GameOverPanel.style.visibility = Visibility.Hidden;
         
         m_CurrentLevel = 1;
         m_FoodAmount = SessionManager.Instance.PlayerData.vidaMaxima;
@@ -104,5 +101,12 @@ public class GameManager : MonoBehaviour
         PlayerController.Init();
         PlayerController.Spawn(BoardManager, new Vector2Int(1,1));
     }
+    void SaveRunResults()
+    {
+        var session = SessionManager.Instance;
 
+        session.RunLevelsCompleted = m_CurrentLevel - 1; 
+        session.RunTurns = TurnManager.TurnCount;
+        session.RunEXP = m_EXPAmount;
+    }
 }

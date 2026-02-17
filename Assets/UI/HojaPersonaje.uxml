@@ -1,15 +1,15 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
     <Style src="project://database/Assets/UI/HojaPersonajeSS.uss?fileID=7433441132597879392&amp;guid=1b1ec39941366e848b38ecd79772c710&amp;type=3#HojaPersonajeSS" />
     <ui:VisualElement name="root" class="root">
-        <ui:VisualElement class="panel" style="width: 672px;">
+        <ui:VisualElement class="panel" style="width: 671px;">
             <ui:VisualElement class="header">
-                <ui:Label text="CREACIÓN DE PERSONAJE" class="title" />
+                <ui:Label text="CREACIÓN DE PERSONAJE" class="title" style="align-self: center;" />
                 <ui:VisualElement class="topRow">
-                    <ui:VisualElement class="nameBox">
+                    <ui:VisualElement class="nameBox" style="min-width: 50%;">
                         <ui:Label text="Nombre:" class="label" />
-                        <ui:TextField name="tfName" class="textField" />
+                        <ui:TextField name="tfName" class="textField" style="min-width: 80%; color: rgb(0, 0, 0); font-size: 20px;" />
                     </ui:VisualElement>
-                    <ui:VisualElement class="pointsBox">
+                    <ui:VisualElement name="VisualElement" class="pointsBox" style="flex-wrap: nowrap; flex-direction: row-reverse; left: auto; width: 1%; min-width: 1%;">
                         <ui:Label text="Puntos:" class="label" />
                         <ui:Label name="lblPoints" text="0&#10;" class="pointsValue" />
                     </ui:VisualElement>
@@ -19,7 +19,7 @@
                 <ui:VisualElement class="col attributes" style="margin-right: 0;">
                     <ui:Label text="ATRIBUTOS" class="sectionTitle" />
                     <ui:VisualElement class="statRow">
-                        <ui:Label text="Resistencia" class="statName" />
+                        <ui:Label text="Constitucion" class="statName" />
                         <ui:VisualElement class="statControls">
                             <ui:Button name="btnVitMinus" text="-" class="btn btnMinus" />
                             <ui:Label name="lblVit" text="1" class="statValue" style="-unity-text-align: upper-center;" />
