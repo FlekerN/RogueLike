@@ -20,6 +20,7 @@ public class MainMenuController : MonoBehaviour
     private VisualElement _root;
 
     public GameObject settingsMenu;
+    public GameObject loadMenu;
     public GameObject newGame;
 
     private Button _btnNew;
@@ -132,7 +133,7 @@ public class MainMenuController : MonoBehaviour
 
     private void OpenLoadGame()
     {
-        //abrir panel dentro de la misma UI
+        loadMenu.SetActive(true);
     }
 
     private void OpenSettings()

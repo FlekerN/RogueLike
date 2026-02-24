@@ -1,0 +1,22 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/HojaPersonajeSS.uss?fileID=7433441132597879392&amp;guid=1b1ec39941366e848b38ecd79772c710&amp;type=3#HojaPersonajeSS" />
+    <ui:VisualElement class="root">
+        <ui:VisualElement class="panel loadPanel">
+            <ui:Label text="LOAD GAME" class="title loadTitle" />
+            <ui:ScrollView name="saveScroll" vertical-scroller-visibility="Auto" horizontal-scroller-visibility="Hidden" class="saveScroll">
+                <ui:VisualElement name="saveList" class="saveList" />
+            </ui:ScrollView>
+            <ui:VisualElement class="divider" />
+            <ui:VisualElement class="infoRow">
+                <ui:Label text="Selected:" class="infoName" />
+                <ui:Label name="selectedSaveLabel" text="(none)" class="infoValue" />
+            </ui:VisualElement>
+            <ui:VisualElement class="loadButtons">
+                <ui:Button name="loadBtn" text="LOAD" class="btnMenu" />
+                <ui:Button name="refreshBtn" text="REFRESH" class="btnMenu" />
+                <ui:Button name="backBtn" text="BACK" class="btnMenu btnDanger" />
+            </ui:VisualElement>
+            <ui:Label text="Tip: click a save to select it." class="hint" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

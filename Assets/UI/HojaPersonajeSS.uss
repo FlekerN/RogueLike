@@ -518,3 +518,86 @@
     unity-font-style: bold;
     color: rgb(255, 210, 120);
 }
+.loadPanel {
+    width: 520px;
+    max-width: 92%;
+    height: auto;
+    gap: 10px;
+}
+
+.loadTitle {
+    font-size: 28px;
+    unity-font-style: bold;
+    text-align: center;
+    color: rgb(230, 215, 180);
+    margin-bottom: 6px;
+}
+
+.saveScroll {
+    height: 260px; /* ajusta a tu gusto */
+    background-color: rgb(28, 24, 22);
+
+    border-left-width: 3px;
+    border-right-width: 3px;
+    border-top-width: 3px;
+    border-bottom-width: 3px;
+
+    border-left-color: rgb(84, 66, 48);
+    border-right-color: rgb(84, 66, 48);
+    border-top-color: rgb(120, 96, 68);
+    border-bottom-color: rgb(50, 40, 30);
+
+    padding: 8px;
+}
+
+.saveList {
+    flex-direction: column;
+    gap: 8px;
+}
+
+/* Item de save */
+.saveItem {
+    flex-direction: column;
+    gap: 4px;
+
+    padding: 8px;
+    background-color: rgb(22, 18, 16);
+
+    border-left-width: 2px;
+    border-right-width: 2px;
+    border-top-width: 2px;
+    border-bottom-width: 2px;
+
+    border-left-color: rgb(70, 56, 40);
+    border-right-color: rgb(70, 56, 40);
+    border-top-color: rgb(95, 76, 54);
+    border-bottom-color: rgb(40, 32, 24);
+}
+
+.saveItem:hover {
+    background-color: rgb(30, 24, 20);
+}
+
+.saveItemSelected {
+    border-left-color: rgb(255, 210, 120);
+    border-right-color: rgb(255, 210, 120);
+    border-top-color: rgb(255, 210, 120);
+    border-bottom-color: rgb(255, 210, 120);
+}
+
+.saveName {
+    font-size: 16px;
+    unity-font-style: bold;
+    color: rgb(255, 210, 120);
+}
+
+.saveMeta {
+    font-size: 12px;
+    color: rgb(170, 160, 140);
+    white-space: normal;
+}
+
+.loadButtons {
+    flex-direction: column;
+    gap: 10px;
+}

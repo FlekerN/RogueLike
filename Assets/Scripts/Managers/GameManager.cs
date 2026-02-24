@@ -81,7 +81,10 @@ public class GameManager : MonoBehaviour
         BoardManager.Clean();
         BoardManager.Init();
         PlayerController.Spawn(BoardManager, new Vector2Int(1,1));
-        
+        SessionManager.Instance.PlayerData.experiencia = m_EXPAmount;
+        SessionManager.Instance.PlayerData.vidaMaxima = m_FoodAmount;
+        PersistenceManager.SavePlayerData(SessionManager.Instance.PlayerData, SessionManager.Instance.PlayerData.nombre);
+
         m_CurrentLevel++;
     }
     public void StartNewGame()
@@ -96,7 +99,10 @@ public class GameManager : MonoBehaviour
         BoardManager.Clean();
         BoardManager.Init();
 
-        //PersistenceManager.SavePlayerData(SessionManager.Instance.PlayerData, SessionManager.Instance.PlayerData.nombre);
+        SessionManager.Instance.PlayerData.experiencia = m_EXPAmount;
+        SessionManager.Instance.PlayerData.vidaMaxima = m_FoodAmount;
+
+        PersistenceManager.SavePlayerData(SessionManager.Instance.PlayerData, SessionManager.Instance.PlayerData.nombre);
 
         PlayerController.Init();
         PlayerController.Spawn(BoardManager, new Vector2Int(1,1));

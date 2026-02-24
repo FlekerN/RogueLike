@@ -1,20 +1,18 @@
 using System;
-using Unity.VisualScripting;
-using UnityEngine;
 
 [Serializable]
 public class PlayerStats
 {
-    public string nombre { get; set; }
-    public int fuerza { get; set; }
-    public int resistencia { get; set; }
-    public int supervivencia { get; set; }
-    public int inteligencia { get; set; }
-    public int puntosDisponibles { get; set; }
-    public int experiencia { get; set; }
-    public int vidaMaxima { get; set; }
-    public int damage { get; set; }
-    public int recoleccion { get; set; }
+    public string nombre;
+    public int fuerza;
+    public int resistencia;
+    public int supervivencia;
+    public int inteligencia;
+    public int puntosDisponibles;
+    public int experiencia;
+    public int vidaMaxima; 
+    public int damage; 
+    public int recoleccion; 
 
 
     public PlayerStats()
