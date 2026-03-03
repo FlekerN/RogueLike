@@ -601,3 +601,255 @@
     flex-direction: column;
     gap: 10px;
 }
+.pauseRoot {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+
+    justify-content: center;
+    align-items: center;
+
+    /* Semitransparente para que se vea el juego detrás */
+    background-color: rgba(0, 0, 0, 0.55);
+}
+
+/* Opcional: un poquito más “menú” (como la imagen) */
+.pausePanel {
+    width: 520px;
+}
+
+/* Opcional: espaciado más similar a tu captura */
+.pausePanel .menuButtons {
+    gap: 10px;
+}
+.scoreboard-panel {
+    margin-top: 20px;
+    padding: 12px;
+    background-color: rgba(0,0,0,0.35);
+    border-radius: 8px;
+}
+
+.scoreboard-title {
+    unity-font-style: bold;
+    font-size: 18px;
+    margin-bottom: 6px;
+}
+
+.scoreboard-row {
+    margin-top: 3px;
+    margin-bottom: 3px;
+    color: #F5E6C8;
+}
+/* Fondo oscurecido tipo modal */
+.shop-root {
+    position: absolute;
+    left: 0; top: 0; right: 0; bottom: 0;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.55);
+}
+
+/* Ventana principal */
+.shop-window {
+    width: 720px;
+    max-width: 90%;
+    padding: 18px;
+    border-left-width: 3px;
+    border-right-width: 3px;
+    border-top-width: 3px;
+    border-bottom-width: 3px;
+
+    border-left-color: rgb(174, 140, 86);
+    border-right-color: rgb(174, 140, 86);
+    border-top-color: rgb(174, 140, 86);
+    border-bottom-color: rgb(174, 140, 86);
+
+    background-color: rgb(34, 28, 24);
+}
+
+/* Header */
+.shop-header {
+    padding-top: 6px;
+    padding-bottom: 12px;
+    border-bottom-width: 2px;
+    border-bottom-color: rgba(174, 140, 86, 0.6);
+}
+
+.shop-title {
+    font-size: 28px;
+    unity-font-style: bold;
+    color: rgb(235, 213, 170);
+    letter-spacing: 1px;
+    -unity-text-align: middle-center;
+}
+
+/* Body layout */
+.shop-body {
+    flex-direction: row;
+    gap: 16px;
+    padding-top: 14px;
+}
+
+/* Merchant panel */
+.merchant-panel {
+    width: 240px;
+    padding: 12px;
+    border-left-width: 2px;
+    border-right-width: 2px;
+    border-top-width: 2px;
+    border-bottom-width: 2px;
+
+    border-left-color: rgba(174, 140, 86, 0.5);
+    border-right-color: rgba(174, 140, 86, 0.5);
+    border-top-color: rgba(174, 140, 86, 0.5);
+    border-bottom-color: rgba(174, 140, 86, 0.5);
+
+    background-color: rgba(20, 16, 14, 0.75);
+}
+
+.merchant-image {
+    width: 100%;
+    height: 220px;
+    background-color: rgba(10, 8, 7, 0.65);
+    border-left-width: 2px;
+    border-right-width: 2px;
+    border-top-width: 2px;
+    border-bottom-width: 2px;
+    border-left-color: rgba(174, 140, 86, 0.35);
+    border-right-color: rgba(174, 140, 86, 0.35);
+    border-top-color: rgba(174, 140, 86, 0.35);
+    border-bottom-color: rgba(174, 140, 86, 0.35);
+}
+
+.merchant-name {
+    margin-top: 10px;
+    font-size: 16px;
+    unity-font-style: bold;
+    color: rgb(235, 213, 170);
+}
+
+.merchant-subtitle {
+    margin-top: 4px;
+    font-size: 12px;
+    color: rgba(235, 213, 170, 0.7);
+}
+
+/* Items panel */
+.items-panel {
+    flex-grow: 1;
+    padding: 12px;
+    border-left-width: 2px;
+    border-right-width: 2px;
+    border-top-width: 2px;
+    border-bottom-width: 2px;
+
+    border-left-color: rgba(174, 140, 86, 0.5);
+    border-right-color: rgba(174, 140, 86, 0.5);
+    border-top-color: rgba(174, 140, 86, 0.5);
+    border-bottom-color: rgba(174, 140, 86, 0.5);
+
+    background-color: rgba(20, 16, 14, 0.75);
+}
+
+.section-title {
+    font-size: 14px;
+    unity-font-style: bold;
+    color: rgba(235, 213, 170, 0.85);
+    margin-bottom: 10px;
+    letter-spacing: 1px;
+}
+
+/* Item row */
+.item-row {
+    flex-direction: row;
+    align-items: center;
+    padding: 10px;
+    margin-bottom: 10px;
+
+    border-left-width: 2px;
+    border-right-width: 2px;
+    border-top-width: 2px;
+    border-bottom-width: 2px;
+
+    border-left-color: rgba(174, 140, 86, 0.35);
+    border-right-color: rgba(174, 140, 86, 0.35);
+    border-top-color: rgba(174, 140, 86, 0.35);
+    border-bottom-color: rgba(174, 140, 86, 0.35);
+
+    background-color: rgba(10, 8, 7, 0.65);
+}
+
+.item-name {
+    flex-grow: 1;
+    font-size: 14px;
+    unity-font-style: bold;
+    color: rgb(235, 213, 170);
+}
+
+.item-stat {
+    width: 160px;
+    font-size: 12px;
+    color: rgba(235, 213, 170, 0.75);
+    -unity-text-align: middle-right;
+    margin-right: 10px;
+}
+
+.item-price {
+    width: 70px;
+    font-size: 14px;
+    unity-font-style: bold;
+    color: rgb(235, 213, 170);
+    -unity-text-align: middle-right;
+    margin-right: 12px;
+}
+
+/* Buttons */
+.btntienda {
+    height: 34px;
+    min-width: 90px;
+
+    border-left-width: 2px;
+    border-right-width: 2px;
+    border-top-width: 2px;
+    border-bottom-width: 2px;
+
+    border-left-color: rgba(174, 140, 86, 0.7);
+    border-right-color: rgba(174, 140, 86, 0.7);
+    border-top-color: rgba(174, 140, 86, 0.7);
+    border-bottom-color: rgba(174, 140, 86, 0.7);
+
+    background-color: rgba(34, 28, 24, 0.95);
+    color: rgb(235, 213, 170);
+    unity-font-style: bold;
+}
+
+.btntienda:hover {
+    background-color: rgba(50, 40, 34, 0.95);
+}
+
+.btntienda:active {
+    background-color: rgba(20, 16, 14, 0.95);
+}
+
+.btntienda-exit {
+    min-width: 120px;
+}
+
+/* Footer */
+.shop-footer {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 8px;
+    padding-top: 10px;
+    border-top-width: 2px;
+    border-top-color: rgba(174, 140, 86, 0.35);
+}
+
+.gold-label {
+    font-size: 14px;
+    unity-font-style: bold;
+    color: rgb(235, 213, 170);
+}

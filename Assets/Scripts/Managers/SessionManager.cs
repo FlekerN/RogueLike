@@ -1,19 +1,30 @@
 using UnityEngine;
-
+using System.Collections.Generic;
 public class SessionManager : MonoBehaviour
 {
     private static SessionManager _instance;
     public PlayerStats PlayerData { get; private set; }
+    public AchievementManger AchievementManager { get; private set; }
+    public List<Achievment> Achievements { get; private set; }
+     public List<Item> ShopItems { get; private set; }
     public int RunLevelsCompleted { get; set; }
     public int RunTurns { get; set; }
     public int RunEXP { get; set; }
 
     public void SetPlayerData(PlayerStats data)
     {
-        PlayerData = data?.Clone();
+        PlayerData = data;
         Debug.Log($"PlayerData guardado. STR={PlayerData.fuerza}/{PlayerData.damage}, VIT={PlayerData.resistencia}/{PlayerData.vidaMaxima}");
     }
-
+    public void SetShopItems(List<Item> items)
+    {
+        ShopItems = items;
+    }
+    public void SetAchievements(List<Achievment> achievements)
+    {
+        Achievements = achievements;
+        AchievementManager.Logros = achievements;
+    }
     public static SessionManager Instance
     {
         get
@@ -51,5 +62,6 @@ public class SessionManager : MonoBehaviour
             _instance = this;
             DontDestroyOnLoad(gameObject); 
         }
+        AchievementManager = FindFirstObjectByType<AchievementManger>();
     }
 }

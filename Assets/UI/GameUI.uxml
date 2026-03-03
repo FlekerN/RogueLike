@@ -1,6 +1,6 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" editor-extension-mode="False">
     <Style src="project://database/Assets/UI/HojaPersonajeSS.uss?fileID=7433441132597879392&amp;guid=1b1ec39941366e848b38ecd79772c710&amp;type=3#HojaPersonajeSS" />
-    <ui:VisualElement class="hud-root">
+    <ui:VisualElement name="VisualElement" class="hud-root" style="bottom: 5%; left: 5%;">
         <ui:VisualElement class="hud-panel">
             <ui:VisualElement class="hud-row">
                 <ui:Label name="playerNameLabel" text="Jugador" class="hud-name" />
@@ -11,7 +11,7 @@
                 <ui:Label name="foodLabel" text="0" class="hud-value" />
             </ui:VisualElement>
             <ui:VisualElement class="hud-row">
-                <ui:Label text="Experiencia" class="hud-name" />
+                <ui:Label text="Gemas" class="hud-name" />
                 <ui:Label name="xpLabel" text="0" class="hud-value" />
             </ui:VisualElement>
         </ui:VisualElement>

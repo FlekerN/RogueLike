@@ -2,12 +2,16 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
-
+using System.Linq;
 
 public static class PersistenceManager 
 {
-    private const string Extension = "*.rgl";
-
+    private const string GlobalPlayerExtension = "*.rgl";
+    private const string PlayerExtension = ".rgl";
+    private const string AchievementsExtension = ".ach.json";
+    private const string ScoreboardFileName = "scoreboard.json";
+    private const int MAX_SCORES = 5;
+    
     [Serializable]
     public class SaveSlotInfo
     {
@@ -15,6 +19,31 @@ public static class PersistenceManager
         public string fullPath;      
         public DateTime lastWrite;   
         public PlayerStats preview;  
+    }
+    [Serializable]
+    public class ScoreEntry
+    {
+        public string playerName;
+        public int levelReached;
+        public long timestamp;
+
+        public ScoreEntry(string name, int level)
+        {
+            playerName = name;
+            levelReached = level;
+            timestamp = System.DateTimeOffset.UtcNow.ToUnixTimeSeconds();
+        }
+    }
+    [Serializable]
+    public class ScoreboardData
+    {
+        public List<ScoreEntry> topScores = new List<ScoreEntry>();
+    }
+
+    [Serializable]
+    public class AchievementSaveData
+    {
+        public List<Achievment> logros;
     }
 
     public static List<SaveSlotInfo> GetAllSaves(bool loadPreviewData = true)
@@ -25,7 +54,7 @@ public static class PersistenceManager
         if (!Directory.Exists(dir))
             return result;
 
-        string[] files = Directory.GetFiles(dir, Extension, SearchOption.TopDirectoryOnly);
+        string[] files = Directory.GetFiles(dir, GlobalPlayerExtension, SearchOption.TopDirectoryOnly);
 
         foreach (var path in files)
         {
@@ -55,37 +84,117 @@ public static class PersistenceManager
             result.Add(slot);
         }
 
-        // Ordena por el más reciente primero (opcional)
+        // Ordena por el más reciente primero 
         result.Sort((a, b) => b.lastWrite.CompareTo(a.lastWrite));
 
         return result;
     }
-    public static PlayerStats LoadCharacter(string filename)
+    public static PlayerStats LoadCharacter(string saveNameNoExt)
     {
-        PlayerStats stats = null;
-        string ruta = Path.Combine(Application.persistentDataPath, filename);
+        string ruta = Path.Combine(Application.persistentDataPath, saveNameNoExt + PlayerExtension);
+        if (!File.Exists(ruta)) return null;
 
-        if (File.Exists(ruta))
-        {
-            string contenidoJSON = File.ReadAllText(ruta);
-
-            stats = JsonUtility.FromJson<PlayerStats>(contenidoJSON);
-            Debug.Log("Datos cargados: " + stats.nombre);
-            return stats;
-        }
-        else
-        {
-            Debug.Log("No se encontró el archivo de datos.");
-            return null;
-        }
+        string json = File.ReadAllText(ruta);
+        return JsonUtility.FromJson<PlayerStats>(json);
     }
     public static void SavePlayerData(PlayerStats playerData, string filename)
     {
-
         string json = JsonUtility.ToJson(playerData);
-        string saveName = Path.Combine(Application.persistentDataPath, filename + ".rgl");
+        string saveName = Path.Combine(Application.persistentDataPath, filename + PlayerExtension);
 
         File.WriteAllText(saveName, json);
+    }
+    private static string GetAchievementsPath(string playerName)
+    {
+        return Path.Combine(Application.persistentDataPath, playerName + AchievementsExtension);
+    }
+    public static void SaveAchievements(List<Achievment> logros)
+    {
+        var data = new AchievementSaveData
+        {
+            logros = logros
+        };
 
+        string json = JsonUtility.ToJson(data, prettyPrint: true);
+        File.WriteAllText(GetAchievementsPath(SessionManager.Instance.PlayerData.nombre), json);
+    }
+    public static List<Achievment> LoadAchievements(string playerName)
+    {
+        string path = GetAchievementsPath(playerName);
+
+        if (!File.Exists(path))
+            return null; 
+
+        try
+        {
+            string json = File.ReadAllText(path);
+            var data = JsonUtility.FromJson<AchievementSaveData>(json);
+            return data?.logros;
+        }
+        catch (Exception e)
+        {
+            Debug.LogWarning($"No se pudieron cargar logros de {playerName}: {e.Message}");
+            return null;
+        }
+    }
+
+    private static string GetScoreboardPath()
+    {
+        return Path.Combine(Application.persistentDataPath, ScoreboardFileName);
+    }
+    public static ScoreboardData LoadScoreboard()
+    {
+        string path = GetScoreboardPath();
+
+        if (!File.Exists(path))
+            return new ScoreboardData();
+
+        try
+        {
+            string json = File.ReadAllText(path);
+
+            if (string.IsNullOrWhiteSpace(json))
+                return new ScoreboardData();
+
+            var data = JsonUtility.FromJson<ScoreboardData>(json);
+            return data ?? new ScoreboardData();
+        }
+        catch (Exception e)
+        {
+            Debug.LogWarning($"No se pudo cargar scoreboard {path}: {e.Message}");
+            return new ScoreboardData();
+        }
+    }
+    public static void AddScore(string playerName, int levelReached)
+    {
+        var data = LoadScoreboard();
+
+        // Normaliza nombre (evita " Ana " y "Ana")
+        playerName = string.IsNullOrWhiteSpace(playerName) ? "Jugador" : playerName.Trim();
+
+        // Añadimos la partida
+        data.topScores.Add(new ScoreEntry(playerName, levelReached));
+
+        // Nos quedamos con 1 entrada por jugador: su MEJOR nivel
+        // Si empata en nivel, nos quedamos con la MÁS RECIENTE
+        data.topScores = data.topScores
+            .GroupBy(s => s.playerName.Trim(), StringComparer.OrdinalIgnoreCase)
+            .Select(g => g
+                .OrderByDescending(x => x.levelReached)
+                .ThenByDescending(x => x.timestamp)
+                .First()
+            )
+            // Orden final
+            .OrderByDescending(s => s.levelReached)
+            .ThenByDescending(s => s.timestamp)
+            // Top 5
+            .Take(MAX_SCORES)
+            .ToList();
+
+        // Guardado a archivo
+        string path = GetScoreboardPath();
+        string json = JsonUtility.ToJson(data, prettyPrint: true);
+        File.WriteAllText(path, json);
     }
 }
+

@@ -1,0 +1,42 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/HojaPersonajeSS.uss?fileID=7433441132597879392&amp;guid=1b1ec39941366e848b38ecd79772c710&amp;type=3#HojaPersonajeSS" />
+    <ui:VisualElement name="ShopRoot" class="shop-root" style="top: 0; bottom: 2px; right: 0; left: 0;">
+        <ui:VisualElement class="shop-window" style="width: 903px;">
+            <ui:VisualElement class="shop-header">
+                <ui:Label text="TIENDA" class="shop-title" />
+            </ui:VisualElement>
+            <ui:VisualElement class="shop-body">
+                <ui:VisualElement class="merchant-panel">
+                    <ui:VisualElement name="MerchantImage" class="merchant-image" style="background-image: url(&quot;project://database/Assets/Roguelike2D/TutorialAssets/Sprites/JackWalleReaper.png?fileID=2800000&amp;guid=bcc8eafdd6eae6440b37fc628526a74a&amp;type=3#JackWalleReaper&quot;);" />
+                    <ui:Label text="Mercader:&#10;Jack Wallet Reaper" class="merchant-name" />
+                    <ui:Label text="Elige 1 mejora (o vuelve luego)" class="merchant-subtitle" />
+                </ui:VisualElement>
+                <ui:VisualElement class="items-panel">
+                    <ui:Label text="OFERTAS" class="section-title" />
+                    <ui:VisualElement name="ItemRow0" class="item-row">
+                        <ui:Label name="ItemName0" text="Item Name" class="item-name" />
+                        <ui:Label name="ItemStat0" text="+Stat" class="item-stat" />
+                        <ui:Label name="ItemPrice0" text="00" class="item-price" style="width: 32px;" />
+                        <ui:Button name="BuyBtn0" text="BUY" class="btn-buy btntienda" />
+                    </ui:VisualElement>
+                    <ui:VisualElement name="ItemRow1" class="item-row">
+                        <ui:Label name="ItemName1" text="Item Name" class="item-name" />
+                        <ui:Label name="ItemStat1" text="+Stat" class="item-stat" />
+                        <ui:Label name="ItemPrice1" text="00" class="item-price" style="width: 29px;" />
+                        <ui:Button name="BuyBtn1" text="BUY" class="btn-buy btntienda" />
+                    </ui:VisualElement>
+                    <ui:VisualElement name="ItemRow2" class="item-row">
+                        <ui:Label name="ItemName2" text="Item Name" class="item-name" />
+                        <ui:Label name="ItemStat2" text="+Stat" class="item-stat" />
+                        <ui:Label name="ItemPrice2" text="00" class="item-price" style="width: 30px;" />
+                        <ui:Button name="BuyBtn2" text="BUY" class="btn-buy btntienda" />
+                    </ui:VisualElement>
+                    <ui:VisualElement class="shop-footer">
+                        <ui:Label name="PlayerGoldLabel" text="GEMAS: 0" class="gold-label" />
+                        <ui:Button name="BtnShopExit" text="SALIR" class="btn-exit btntienda" />
+                    </ui:VisualElement>
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

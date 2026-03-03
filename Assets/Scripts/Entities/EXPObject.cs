@@ -7,6 +7,5 @@ public class EXPObject : CellObject
     {
         Destroy(gameObject);
         GameManager.Instance.ChangeEXP(AmountGranted);
-
     }
 }

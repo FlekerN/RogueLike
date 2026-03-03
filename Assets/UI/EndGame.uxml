@@ -13,7 +13,7 @@
                     <ui:Label name="TurnsValue" text="0" class="go-value" />
                 </ui:VisualElement>
                 <ui:VisualElement class="go-row">
-                    <ui:Label text="Experiencia conseguida" class="go-name" />
+                    <ui:Label text="Gemas conseguidas" class="go-name" />
                     <ui:Label name="ExpValue" text="0" class="go-value" />
                 </ui:VisualElement>
             </ui:VisualElement>

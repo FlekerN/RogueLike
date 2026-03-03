@@ -15,6 +15,9 @@ public class BoardManager : MonoBehaviour
     public EXPObject ExpPrefab;
     public EnemyController EnemyObjectControllerPrefab;
     public ExitCellObject ExitCellPrefab;
+    private Vector2Int exitCell;
+    public ShopObject ShopNpcPrefab;
+    [Range(0f, 1f)] public float shopNpcChancePerLevel = 0.30f;
     private CellData[,] m_BoardData;
     private Tilemap m_Tilemap;
     private Grid m_Grid;
@@ -29,17 +32,21 @@ public class BoardManager : MonoBehaviour
     public Tile[] WallTiles;
     public List<Vector2Int> m_EmptyCellsList;
   
-  
    public void Init()
     {
+        if(Width>30 || Height>30)
+        {
+            Width = 30;
+            Height = 30;
+        }
         area = Width * Height;
+        exitCell = new Vector2Int(Width - 2, Height - 2);
         m_Tilemap = GetComponentInChildren<Tilemap>();
         m_Grid = GetComponentInChildren<Grid>();
         //Initialize the list
         m_EmptyCellsList = new List<Vector2Int>();
         
         m_BoardData = new CellData[Width, Height];
-
 
         for (int y = 0; y < Height; ++y)
         {
@@ -64,18 +71,16 @@ public class BoardManager : MonoBehaviour
                 m_Tilemap.SetTile(new Vector3Int(x, y, 0), tile);
             }
         }
-        
-        //remove the starting point of the player! It's not empty, the player is there
-        m_EmptyCellsList.Remove(new Vector2Int(1, 1));
-        
-        Vector2Int endCoord = new Vector2Int(Width - 2, Height - 2);
-        AddObject(Instantiate(ExitCellPrefab), endCoord);
-        m_EmptyCellsList.Remove(endCoord);
+
+        ReserveCells();
+
+        AddObject(Instantiate(ExitCellPrefab), exitCell);
 
         GenerateWall();
         GenerateFood();
         GenerateEnemy();
         GenerateExp();
+        ShopNpcSpawn();
     }
 
     public Vector3 CellToWorld(Vector2Int cellIndex)
@@ -154,20 +159,39 @@ public class BoardManager : MonoBehaviour
             AddObject(newEXP, coord);
 
         }
-
     }
+    void ShopNpcSpawn()
+    {
+        if (Random.value > shopNpcChancePerLevel) return;
 
+        Vector2Int topLeft = new Vector2Int(1, Height - 2);
+        AddObject(Instantiate(ShopNpcPrefab), topLeft);
+    }
     public void SetCellTile(Vector2Int cellIndex, Tile tile)
     {
         m_Tilemap.SetTile(new Vector3Int(cellIndex.x, cellIndex.y, 0), tile);
     }
-
-    void AddObject(CellObject obj, Vector2Int coord)
+    void AddObject(CellObject obj, Vector2Int coord, bool passable = true)
     {
         CellData data = m_BoardData[coord.x, coord.y];
+
+        if(passable)
+            data.Passable = true;    
+        else
+            data.Passable = false;
+
         obj.transform.position = CellToWorld(coord);
         data.ContainedObject = obj;
         obj.Init(coord);
+    }
+    void ReserveCells()
+    {
+        Vector2Int playerSpawn = new Vector2Int(1, 1);
+        Vector2Int shopTopLeft = new Vector2Int(1, Height - 2);
+
+        m_EmptyCellsList.Remove(playerSpawn);
+        m_EmptyCellsList.Remove(exitCell);
+        m_EmptyCellsList.Remove(shopTopLeft);
     }
     public void Clean()
     {

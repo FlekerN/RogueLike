@@ -93,12 +93,12 @@ public class PlayerCreator : MonoBehaviour
     {
         SceneManager.LoadScene("MainMenu");
     }
-    private static string SanitizarNombre(string input)
+    private static string SanitizarNombre(string nombre)
     {
-        if (input == null) return "";
+        if (nombre == null) return "";
 
         // Recorta y colapsa espacios múltiples
-        var trimmed = input.Trim();
+        var trimmed = nombre.Trim();
         while (trimmed.Contains("  "))
             trimmed = trimmed.Replace("  ", " ");
 

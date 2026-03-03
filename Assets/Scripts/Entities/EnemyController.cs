@@ -83,7 +83,7 @@ public class EnemyController : CellObject
           || (yDist == 0 && absXDist == 1))
       {
           //we are adjacent to the player, attack!
-          GameManager.Instance.ChangeFood(3);
+          GameManager.Instance.ChangeFood(-3);
       }
       else
       {

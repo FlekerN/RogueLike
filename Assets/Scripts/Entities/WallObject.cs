@@ -17,7 +17,9 @@ public class WallObject : CellObject
        m_HealthPoint = MaxHealth;
        
        m_OriginalTile = GameManager.Instance.BoardManager.GetCellTile(cell);
+
        Tile newtile = ObstacleTile[Random.Range(0, ObstacleTile.Length)];
+       
        GameManager.Instance.BoardManager.SetCellTile(cell, newtile);
    }
 

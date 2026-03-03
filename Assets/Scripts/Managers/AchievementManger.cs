@@ -18,20 +18,32 @@ public class AchievementManger : MonoBehaviour
         Logros.Add(logro);
         logro = new Achievment("FOOD", "Cementerio de Hamburguesas", "Deberios de pensar en una dieta", 1000);
         Logros.Add(logro);
+
+        SessionManager.Instance.SetAchievements(Logros);
     }
     public void checkAchievement(string IDAchievement, int cantidad = 1) 
     {
+        bool changed = false;
+
         foreach (Achievment l in Logros) 
         {
             if (l.ID == IDAchievement && l.Completed == false) 
             {
                 l.CurrentAchieved += cantidad;
+                changed = true;
+
                 if (l.CurrentAchieved >= l.AmountToAchieve) 
                 {
-                    l.Completed=true;
-                    Debug.Log(l.Name + ": "+l.Description);
+                    l.Completed = true;
+                    Debug.Log(l.Name + ": " + l.Description);
                 }
             }
+        }
+
+        if (changed)
+        {
+            SessionManager.Instance.SetAchievements(Logros);
+            PersistenceManager.SaveAchievements(Logros);
         }
     }
     private void OnEnable()

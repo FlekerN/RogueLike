@@ -49,7 +49,7 @@ public class LoadGameMenuController : MonoBehaviour
         _selectedIndex = -1;
         _selectedSaveLabel.text = "(none)";
         _loadBtn.SetEnabled(false);
-
+        Debug.Log("hola");
         _saveList.Clear();
 
         if (_saves.Count == 0)
@@ -83,8 +83,7 @@ public class LoadGameMenuController : MonoBehaviour
         string meta = $"Last played: {slot.lastWrite:yyyy-MM-dd HH:mm}";
         if (slot.preview != null)
         {
-            // Ajusta estos campos según tu PlayerStats real
-            meta += $" | Experiencia: {slot.preview.experiencia}";
+            meta += $" | Gemas: {slot.preview.experiencia}";
         }
 
         var metaLabel = new Label(meta);
@@ -122,10 +121,11 @@ public class LoadGameMenuController : MonoBehaviour
 
         try
         {
-            string json = File.ReadAllText(selected.fullPath);
-            var data = JsonUtility.FromJson<PlayerStats>(json);
-
+            var data = PersistenceManager.LoadCharacter(selected.fileName);
             SessionManager.Instance.SetPlayerData(data);
+            
+            var ach = PersistenceManager.LoadAchievements(data.nombre);
+            SessionManager.Instance.SetAchievements(ach);
 
             SceneManager.LoadScene(gameSceneName);
         }
@@ -137,7 +137,7 @@ public class LoadGameMenuController : MonoBehaviour
 
     private void OnBackClicked()
     {
-        gameObject.SetActive(false);
+      SceneManager.LoadScene("MainMenu");
     }
 
 

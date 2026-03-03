@@ -13,12 +13,19 @@ public class GameManager : MonoBehaviour
     public BoardManager BoardManager;
     public PlayerController PlayerController;
     public TurnManager TurnManager { get; private set;}
-    public int CurrentLevel => m_CurrentLevel;
-    public int CurrentEXP => m_EXPAmount;
     private int m_FoodAmount;
+    public int m_MaxFoodAmount;
     private int m_EXPAmount;
-    private int m_EXPToReach = 10;
     private int m_CurrentLevel = 1;
+    private int CheckSizeMap = 5;
+    [Header("Shop UI Toolkit")]
+    public UIDocument ShopUIDoc; 
+    private VisualElement m_ShopRoot;
+    private Button m_ShopExitButton;
+    [Header("Shop Pause Blockers")]
+    [SerializeField] private MonoBehaviour playerMovementScript; 
+
+private bool m_ShopOpen = false;
 
     public void Awake()
     {
@@ -41,6 +48,7 @@ public class GameManager : MonoBehaviour
         m_PlayerLabel = UIDoc.rootVisualElement.Q<Label>("playerValueLabel");
         m_PlayerName = SessionManager.Instance.PlayerData.nombre;
         
+        InitShopUI();
         StartNewGame();
     }
     void OnTurnHappen()
@@ -49,7 +57,12 @@ public class GameManager : MonoBehaviour
     }
     public void ChangeFood(int amount)
     {
+    
         m_FoodAmount += amount;
+
+        if (m_FoodAmount > m_MaxFoodAmount)
+            m_FoodAmount = m_MaxFoodAmount;
+
         m_FoodLabel.text = m_FoodAmount.ToString();
 
         if (m_FoodAmount <= 0)
@@ -57,6 +70,7 @@ public class GameManager : MonoBehaviour
             PlayerController.GameOver();
 
             SaveRunResults();
+            SaveScoreResult();
 
             SceneManager.LoadScene("EndScreen");
         }
@@ -65,24 +79,25 @@ public class GameManager : MonoBehaviour
     {
         m_EXPAmount += amount;
         m_ExpLabel.text = m_EXPAmount.ToString();
-
-        if (m_EXPAmount >= m_EXPToReach)
-        {
-            //sube de nivel
-            m_EXPToReach += 5;
-        }
+        SessionManager.Instance.PlayerData.experiencia = m_EXPAmount;
     }
     public void NewLevel()
     {
-        if (m_CurrentLevel >=5)
-        {
-            
-        }
         BoardManager.Clean();
+        if (m_CurrentLevel >= CheckSizeMap)
+        {
+            CheckSizeMap += 5;
+            BoardManager.Width +=3;
+            BoardManager.Height +=3;
+        }
         BoardManager.Init();
         PlayerController.Spawn(BoardManager, new Vector2Int(1,1));
+
         SessionManager.Instance.PlayerData.experiencia = m_EXPAmount;
         SessionManager.Instance.PlayerData.vidaMaxima = m_FoodAmount;
+        SessionManager.Instance.PlayerData.CurrentLevel = m_CurrentLevel;
+
+        SaveScoreResult();
         PersistenceManager.SavePlayerData(SessionManager.Instance.PlayerData, SessionManager.Instance.PlayerData.nombre);
 
         m_CurrentLevel++;
@@ -91,7 +106,12 @@ public class GameManager : MonoBehaviour
     {
         
         m_CurrentLevel = 1;
+
         m_FoodAmount = SessionManager.Instance.PlayerData.vidaMaxima;
+        m_EXPAmount = SessionManager.Instance.PlayerData.experiencia;
+        m_CurrentLevel = SessionManager.Instance.PlayerData.CurrentLevel;
+        m_MaxFoodAmount = SessionManager.Instance.PlayerData.vidaMaxima;
+        
         m_FoodLabel.text = m_FoodAmount.ToString();
         m_ExpLabel.text = m_EXPAmount.ToString();
         m_PlayerLabel.text = m_PlayerName;
@@ -101,7 +121,9 @@ public class GameManager : MonoBehaviour
 
         SessionManager.Instance.PlayerData.experiencia = m_EXPAmount;
         SessionManager.Instance.PlayerData.vidaMaxima = m_FoodAmount;
-
+        SessionManager.Instance.PlayerData.CurrentLevel = m_CurrentLevel;
+     
+        SaveScoreResult();
         PersistenceManager.SavePlayerData(SessionManager.Instance.PlayerData, SessionManager.Instance.PlayerData.nombre);
 
         PlayerController.Init();
@@ -114,5 +136,53 @@ public class GameManager : MonoBehaviour
         session.RunLevelsCompleted = m_CurrentLevel - 1; 
         session.RunTurns = TurnManager.TurnCount;
         session.RunEXP = m_EXPAmount;
+    }
+    public void SaveScoreResult()
+    {
+        string playerName = SessionManager.Instance.PlayerData.nombre; 
+        int levelReached = SessionManager.Instance.PlayerData.CurrentLevel; 
+
+        PersistenceManager.AddScore(playerName, levelReached);
+    }
+    void InitShopUI()
+    {
+        if (ShopUIDoc == null) return;
+
+        var root = ShopUIDoc.rootVisualElement;
+
+        m_ShopRoot = root.Q<VisualElement>("ShopRoot");
+        m_ShopExitButton = root.Q<Button>("BtnShopExit");
+
+        if (m_ShopExitButton != null)
+            m_ShopExitButton.clicked += CloseShop;
+
+        if (m_ShopRoot != null)
+            m_ShopRoot.style.display = DisplayStyle.None;
+    }
+    public void OpenShop()
+    {
+        if (m_ShopOpen) return;
+            m_ShopOpen = true;
+
+        if (m_ShopRoot != null)
+            m_ShopRoot.style.display = DisplayStyle.Flex;
+
+        if (playerMovementScript != null)
+            playerMovementScript.enabled = false;
+
+        var shopController = ShopUIDoc.GetComponent<ShopController>();
+        if (shopController != null) shopController.Refresh();
+    }
+    public void CloseShop()
+    {
+        if (!m_ShopOpen) return;
+        m_ShopOpen = false;
+
+        if (m_ShopRoot != null)
+            m_ShopRoot.style.display = DisplayStyle.None;
+
+        if (playerMovementScript != null)
+            playerMovementScript.enabled = true;
+
     }
 }

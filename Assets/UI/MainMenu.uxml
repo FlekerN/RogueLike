@@ -10,6 +10,14 @@
                 <ui:Button text="QUIT" class="btn btnMenu btnDanger" />
             </ui:VisualElement>
             <ui:Label text="© Ancient Code Studio" class="hint footer" />
+            <ui:VisualElement name="ScoreboardPanel" class="scoreboard-panel">
+                <ui:Label text="TOP 5 PARTIDAS" class="scoreboard-title" style="color: rgb(198, 189, 164);" />
+                <ui:Label name="Score0" class="scoreboard-row" />
+                <ui:Label name="Score1" class="scoreboard-row" />
+                <ui:Label name="Score2" class="scoreboard-row" />
+                <ui:Label name="Score3" class="scoreboard-row" />
+                <ui:Label name="Score4" class="scoreboard-row" />
+            </ui:VisualElement>
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

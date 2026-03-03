@@ -1,12 +1,12 @@
-using UnityEngine;
+using System;
 
+[Serializable]
 public class Achievment
 {
     public string ID;
     public string Name;
     public string Description;
     public int AmountToAchieve;
-
     public int CurrentAchieved;
     public bool Completed;
 

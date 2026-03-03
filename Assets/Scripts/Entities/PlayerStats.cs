@@ -13,7 +13,7 @@ public class PlayerStats
     public int vidaMaxima; 
     public int damage; 
     public int recoleccion; 
-
+    public int CurrentLevel;
 
     public PlayerStats()
     {
@@ -24,16 +24,10 @@ public class PlayerStats
         inteligencia = 1;
         puntosDisponibles = 0;
         experiencia = 0;
-
+        CurrentLevel = 1;
         vidaMaxima = 0;
         damage = 0;
         recoleccion = 0;
-    }
-
-    public PlayerStats(string nombre):this()
-    { 
-        this.nombre = nombre;
-        
     }
     public void RecalcularStats()
     {
@@ -41,21 +35,21 @@ public class PlayerStats
         damage = (10 + fuerza) / 10;
         recoleccion = 5 + supervivencia / 2;
     }   
-    public PlayerStats Clone()
+    public void AplicarItem(Item item)
     {
-        return new PlayerStats
+        switch (item.Stat)
         {
-            nombre = this.nombre,
-            fuerza = this.fuerza,
-            resistencia = this.resistencia,
-            supervivencia = this.supervivencia,
-            inteligencia = this.inteligencia,
-            puntosDisponibles = this.puntosDisponibles,
-            experiencia = this.experiencia,
-            vidaMaxima = this.vidaMaxima,
-            damage = this.damage,
-            recoleccion =this.recoleccion
-        };
-    }
+            case StatType.Fuerza:
+                SessionManager.Instance.PlayerData.fuerza++;
+                break;
+            case StatType.Resistencia:
+                SessionManager.Instance.PlayerData.resistencia++;
+                break;
+            case StatType.Supervivencia:
+                SessionManager.Instance.PlayerData.supervivencia++;
+                break;
+        }
 
+        RecalcularStats();
+    }
 }

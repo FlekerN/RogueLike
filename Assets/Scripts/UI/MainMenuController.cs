@@ -48,8 +48,9 @@ public class MainMenuController : MonoBehaviour
         if (_btnLoad == null) _btnLoad = FindButtonByText("LOAD GAME");
         if (_btnSettings == null) _btnSettings = FindButtonByText("SETTINGS");
         if (_btnQuit == null) _btnQuit = FindButtonByText("QUIT");
-
+        
         HookEvents();
+        LoadScoreboardUI();
     }
 
     private void OnDisable()
@@ -71,7 +72,34 @@ public class MainMenuController : MonoBehaviour
         if (_btnQuit != null) _btnQuit.clicked += OnQuitClicked;
         else Debug.LogWarning("[MainMenuController] No se encontró el botón QUIT.");
     }
+    private void LoadScoreboardUI()
+    {
+        var root = GetComponent<UIDocument>().rootVisualElement;
 
+        Label[] rows = new Label[]
+        {
+            root.Q<Label>("Score0"),
+            root.Q<Label>("Score1"),
+            root.Q<Label>("Score2"),
+            root.Q<Label>("Score3"),
+            root.Q<Label>("Score4")
+        };
+
+        var data = PersistenceManager.LoadScoreboard();
+
+        for (int i = 0; i < rows.Length; i++)
+        {
+            if (i < data.topScores.Count)
+            {
+                var s = data.topScores[i];
+                rows[i].text = $"{i + 1}. {s.playerName} - Nivel {s.levelReached}";
+            }
+            else
+            {
+                rows[i].text = $"{i + 1}. ---";
+            }
+        }
+    }
     private void UnhookEvents()
     {
         if (_btnNew != null) _btnNew.clicked -= OnNewGameClicked;
@@ -133,7 +161,7 @@ public class MainMenuController : MonoBehaviour
 
     private void OpenLoadGame()
     {
-        loadMenu.SetActive(true);
+        SceneManager.LoadScene("LoadGame");
     }
 
     private void OpenSettings()
