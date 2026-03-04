@@ -93,14 +93,14 @@ public class EnemyController : CellObject
               {
                   //if our move was not successful (so no move and not attack)
                   //we try to move along Y
-                  TryMoveInY(yDist);
+                TryMoveInY(yDist);
               }
           }
           else
           {
               if (!TryMoveInY(yDist))
               {
-                  TryMoveInX(xDist);
+                TryMoveInX(xDist);
               }
           }
       }
@@ -113,7 +113,7 @@ public class EnemyController : CellObject
       //player to our right
       if (xDist > 0)
       {
-          return MoveTo(m_Cell + Vector2Int.right);
+        return MoveTo(m_Cell + Vector2Int.right);
       }
     
       //player to our left

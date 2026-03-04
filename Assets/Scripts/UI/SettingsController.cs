@@ -50,7 +50,7 @@ public class SettingsController : MonoBehaviour
         bool isFull = fullScreenInt == 1;
 
         // Sincronizar UI
-        m_DisplayDropdown.index = isFull ? 0 : 1; // 0 es"Fullscreen" en la lista, 1 es "Windowed"
+        m_DisplayDropdown.index = isFull ? 0 : 1; // 0 es"Fullscreen" en la lista, 1 es "Wind owed"
         Screen.fullScreen = isFull;
 
         // -- Cargar Audio --

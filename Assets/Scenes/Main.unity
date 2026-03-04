@@ -507,8 +507,8 @@ MonoBehaviour:
   m_PlayerName: 
   BoardManager: {fileID: 819728197}
   PlayerController: {fileID: 1643351444}
+  m_MaxFoodAmount: 0
   ShopUIDoc: {fileID: 1165363991}
-  playerMovementScript: {fileID: 1643351444}
 --- !u!4 &402093203
 Transform:
   m_ObjectHideFlags: 0
@@ -841,7 +841,7 @@ MonoBehaviour:
   ExpPrefab: {fileID: -4094206446316558368, guid: f8517bcc137f84f4cbea40883bdf176b, type: 3}
   EnemyObjectControllerPrefab: {fileID: 4875501756443951686, guid: 5e597054d0d9f7141b7c0eda57b6c931, type: 3}
   ExitCellPrefab: {fileID: 5243252512797103839, guid: 6ee22034213976343bf42374c53ad197, type: 3}
-  ShopNpcPrefab: {fileID: 3365547104985196345, guid: 5f7250210fdfd344c95f2bba8dad26b0, type: 3}
+  ShopNpcPrefab: {fileID: 8966180399883009637, guid: 5f7250210fdfd344c95f2bba8dad26b0, type: 3}
   shopNpcChancePerLevel: 0.3
   Width: 6
   Height: 6
@@ -871,8 +871,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1165363992}
-  - component: {fileID: 1165363991}
   - component: {fileID: 1165363993}
+  - component: {fileID: 1165363991}
   m_Layer: 5
   m_Name: ShopUI
   m_TagString: Untagged
@@ -930,6 +930,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee80bc9c91f33c542a35a9a5e7b47066, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ShopController
+  playerMovementScript: {fileID: 1643351444}
 --- !u!1 &1643351441
 GameObject:
   m_ObjectHideFlags: 0

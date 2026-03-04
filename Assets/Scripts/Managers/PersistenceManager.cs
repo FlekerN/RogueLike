@@ -31,7 +31,7 @@ public static class PersistenceManager
         {
             playerName = name;
             levelReached = level;
-            timestamp = System.DateTimeOffset.UtcNow.ToUnixTimeSeconds();
+            timestamp = DateTimeOffset.UtcNow.ToUnixTimeSeconds();
         }
     }
     [Serializable]
@@ -169,29 +169,18 @@ public static class PersistenceManager
     {
         var data = LoadScoreboard();
 
-        // Normaliza nombre (evita " Ana " y "Ana")
         playerName = string.IsNullOrWhiteSpace(playerName) ? "Jugador" : playerName.Trim();
 
-        // Añadimos la partida
         data.topScores.Add(new ScoreEntry(playerName, levelReached));
 
-        // Nos quedamos con 1 entrada por jugador: su MEJOR nivel
-        // Si empata en nivel, nos quedamos con la MÁS RECIENTE
         data.topScores = data.topScores
             .GroupBy(s => s.playerName.Trim(), StringComparer.OrdinalIgnoreCase)
-            .Select(g => g
-                .OrderByDescending(x => x.levelReached)
-                .ThenByDescending(x => x.timestamp)
-                .First()
-            )
-            // Orden final
+            .Select(g => g.OrderByDescending(x => x.levelReached).ThenByDescending(x => x.timestamp).First())
             .OrderByDescending(s => s.levelReached)
             .ThenByDescending(s => s.timestamp)
-            // Top 5
             .Take(MAX_SCORES)
             .ToList();
 
-        // Guardado a archivo
         string path = GetScoreboardPath();
         string json = JsonUtility.ToJson(data, prettyPrint: true);
         File.WriteAllText(path, json);

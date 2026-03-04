@@ -22,8 +22,6 @@ public class GameManager : MonoBehaviour
     public UIDocument ShopUIDoc; 
     private VisualElement m_ShopRoot;
     private Button m_ShopExitButton;
-    [Header("Shop Pause Blockers")]
-    [SerializeField] private MonoBehaviour playerMovementScript; 
 
 private bool m_ShopOpen = false;
 
@@ -46,8 +44,7 @@ private bool m_ShopOpen = false;
         m_FoodLabel = UIDoc.rootVisualElement.Q<Label>("foodLabel");
         m_ExpLabel = UIDoc.rootVisualElement.Q<Label>("xpLabel");
         m_PlayerLabel = UIDoc.rootVisualElement.Q<Label>("playerValueLabel");
-        m_PlayerName = SessionManager.Instance.PlayerData.nombre;
-        
+
         InitShopUI();
         StartNewGame();
     }
@@ -67,8 +64,6 @@ private bool m_ShopOpen = false;
 
         if (m_FoodAmount <= 0)
         {
-            PlayerController.GameOver();
-
             SaveRunResults();
             SaveScoreResult();
 
@@ -104,9 +99,7 @@ private bool m_ShopOpen = false;
     }
     public void StartNewGame()
     {
-        
-        m_CurrentLevel = 1;
-
+        m_PlayerName = SessionManager.Instance.PlayerData.nombre;
         m_FoodAmount = SessionManager.Instance.PlayerData.vidaMaxima;
         m_EXPAmount = SessionManager.Instance.PlayerData.experiencia;
         m_CurrentLevel = SessionManager.Instance.PlayerData.CurrentLevel;
@@ -118,15 +111,10 @@ private bool m_ShopOpen = false;
 
         BoardManager.Clean();
         BoardManager.Init();
-
-        SessionManager.Instance.PlayerData.experiencia = m_EXPAmount;
-        SessionManager.Instance.PlayerData.vidaMaxima = m_FoodAmount;
-        SessionManager.Instance.PlayerData.CurrentLevel = m_CurrentLevel;
      
         SaveScoreResult();
         PersistenceManager.SavePlayerData(SessionManager.Instance.PlayerData, SessionManager.Instance.PlayerData.nombre);
 
-        PlayerController.Init();
         PlayerController.Spawn(BoardManager, new Vector2Int(1,1));
     }
     void SaveRunResults()
@@ -144,6 +132,7 @@ private bool m_ShopOpen = false;
 
         PersistenceManager.AddScore(playerName, levelReached);
     }
+    
     void InitShopUI()
     {
         if (ShopUIDoc == null) return;
@@ -159,6 +148,7 @@ private bool m_ShopOpen = false;
         if (m_ShopRoot != null)
             m_ShopRoot.style.display = DisplayStyle.None;
     }
+
     public void OpenShop()
     {
         if (m_ShopOpen) return;
@@ -167,8 +157,8 @@ private bool m_ShopOpen = false;
         if (m_ShopRoot != null)
             m_ShopRoot.style.display = DisplayStyle.Flex;
 
-        if (playerMovementScript != null)
-            playerMovementScript.enabled = false;
+        if (PlayerController != null)
+            PlayerController.enabled = false;
 
         var shopController = ShopUIDoc.GetComponent<ShopController>();
         if (shopController != null) shopController.Refresh();
@@ -181,8 +171,8 @@ private bool m_ShopOpen = false;
         if (m_ShopRoot != null)
             m_ShopRoot.style.display = DisplayStyle.None;
 
-        if (playerMovementScript != null)
-            playerMovementScript.enabled = true;
+        if (PlayerController != null)
+            PlayerController.enabled = true;
 
     }
 }
